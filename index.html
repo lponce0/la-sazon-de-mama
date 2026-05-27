@@ -1,0 +1,3022 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>La Sazón de Mamá — Tu carnicería de confianza</title>
+<meta name="theme-color" content="#A6342A" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ============ TOKENS ============ */
+  :root {
+    --paper:      #F7EFE0;
+    --paper-2:    #F2E7D2;
+    --paper-deep: #EADBBE;
+    --ink:        #2B1B11;
+    --ink-soft:   #5A4536;
+    --ink-mute:   #8B7561;
+    --line:       #D9C9A8;
+
+    --carne:      #A6342A;   /* rojo carne */
+    --carne-deep: #7A1F1A;
+    --terra:      #C9774A;   /* terracota */
+    --hierba:     #4A6B3A;   /* verde hierbabuena */
+    --oro:        #FBF6EB;   /* (antes dorado) ahora blanco crema */
+    --crema:      #FBF6EB;
+
+    --radius-s: 10px;
+    --radius-m: 16px;
+    --radius-l: 24px;
+
+    --shadow-sm: 0 1px 2px rgba(61,42,30,0.06), 0 2px 8px rgba(61,42,30,0.04);
+    --shadow-md: 0 4px 14px rgba(61,42,30,0.10), 0 18px 40px -20px rgba(61,42,30,0.18);
+    --shadow-lg: 0 10px 30px rgba(61,42,30,0.14), 0 30px 60px -28px rgba(61,42,30,0.22);
+
+    --maxw: 1200px;
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Karla", system-ui, sans-serif;
+    color: var(--ink);
+    background: #b8814f;
+    line-height: 1.55;
+    font-size: 16px;
+    overflow-x: hidden;
+    /* wood cutting-board background */
+    background-image:
+      linear-gradient(180deg, rgba(247,239,224,0.18), rgba(247,239,224,0.28)),
+      url('assets/wood-bg.png');
+    background-size: auto, 280px auto;
+    background-repeat: no-repeat, repeat;
+    background-attachment: fixed, fixed;
+  }
+  img { max-width: 100%; display: block; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+  a { color: var(--carne-deep); text-decoration: none; }
+  h1, h2, h3, h4 { font-family: "Lora", Georgia, serif; font-weight: 600; letter-spacing: -0.01em; margin: 0; color: var(--ink); }
+
+  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+  /* ============ TOP BAR ============ */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(247,239,224,0.96);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid rgba(217,201,168,0.6);
+    box-shadow: 0 6px 18px -10px rgba(43,27,17,0.35);
+  }
+  .topbar-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px; max-width: var(--maxw); margin: 0 auto;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-mark {
+    width: 40px; height: 40px; flex: none;
+    background: url('assets/fresquicarnes-logo.png') center/contain no-repeat;
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm);
+  }
+  .brand-mark > svg { display: none; }
+  .brand-name {
+    font-family: "Lora", serif; font-weight: 600; font-size: 17px;
+    line-height: 1; color: var(--ink);
+  }
+  .brand-name em { font-style: italic; color: var(--carne-deep); font-weight: 500; }
+  .brand-sub { font-size: 11px; color: var(--ink-mute); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .topbar-cta {
+    font-size: 13px; color: var(--ink-soft);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .topbar-cta .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--hierba); box-shadow: 0 0 0 4px rgba(74,107,58,0.15); }
+
+  /* ============ COVER LOGO BADGE ============ */
+  .cover-logo {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 78px;
+    height: 78px;
+    z-index: 3;
+    background: url('assets/fresquicarnes-logo.png') center/contain no-repeat;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.45));
+    animation: logoIn .8s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes logoIn { from { transform: scale(0.6) rotate(-12deg); opacity: 0; } to { transform: none; opacity: 1; } }
+
+  .cover-store {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(251,246,235,0.75); font-weight: 600;
+    margin-top: 8px;
+  }
+  .cover-store::before {
+    content: ""; width: 22px; height: 1px; background: rgba(251,246,235,0.4);
+  }
+  .cover-delivery {
+    align-self: start;
+    margin-top: 2px;
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 5px 12px 5px 5px;
+    background: rgba(251,246,235,0.10);
+    border: 1px solid rgba(251,246,235,0.28);
+    border-radius: 99px;
+    color: #FBF6EB;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: background .2s ease;
+  }
+  .cover-delivery:hover { background: rgba(251,246,235,0.16); }
+  .cover-delivery .cd-ico {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--carne);
+    display: grid; place-items: center;
+    flex: none;
+  }
+  .cover-delivery .cd-ico svg { width: 11px; height: 11px; }
+  .cover-delivery .cd-text {
+    display: inline-flex; align-items: baseline; gap: 6px; line-height: 1;
+  }
+  .cover-delivery .cd-text small {
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    opacity: 0.7; font-weight: 600;
+  }
+  .cover-delivery .cd-text b {
+    font-family: "Karla", sans-serif; font-weight: 600;
+    font-size: 12.5px; letter-spacing: 0.02em;
+  }
+  .cover {
+    position: relative;
+    width: 100%;
+    min-height: 78vh;
+    overflow: hidden;
+    color: #FBF6EB;
+    display: flex; flex-direction: column; justify-content: end;
+    isolation: isolate;
+  }
+  .cover-img {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url('assets/cover-equipo.jpg');
+    background-size: cover;
+    background-position: center 35%;
+    filter: saturate(1.05) contrast(1.02);
+  }
+  .cover-img::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(43,27,17,0.32) 0%, rgba(43,27,17,0.10) 28%, rgba(43,27,17,0.70) 60%, rgba(43,27,17,0.95) 92%),
+      radial-gradient(900px 400px at 50% 110%, rgba(122,31,26,0.45), transparent 70%);
+  }
+  .cover-grain {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.30'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.5;
+  }
+  .cover-inner {
+    position: relative; z-index: 2;
+    padding: 28px 22px 36px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .cover-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px; align-self: start;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #FBF6EB; font-weight: 600;
+    padding: 7px 13px; border-radius: 99px;
+    background: rgba(251,246,235,0.10);
+    border: 1px solid rgba(251,246,235,0.28);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .cover-eyebrow .pulse { width: 7px; height: 7px; border-radius: 50%; background: #FBF6EB; box-shadow: 0 0 0 4px rgba(251,246,235,0.20); }
+  .cover h1 {
+    font-size: clamp(38px, 11vw, 60px);
+    line-height: 0.98;
+    color: #FBF6EB;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .cover h1 em {
+    font-style: italic;
+    color: #FBF6EB;
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--carne);
+    text-decoration-thickness: 4px;
+    text-underline-offset: 6px;
+  }
+  .cover .lead {
+    font-size: 16px;
+    color: rgba(251,246,235,0.82);
+    max-width: 34ch;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .cover-rule {
+    width: 44px; height: 2px; background: var(--carne); border-radius: 99px; margin-top: 4px;
+  }
+  .cover-meta {
+    display: flex; flex-direction: column; gap: 8px;
+    margin-top: 10px;
+    font-size: 12.5px; color: rgba(251,246,235,0.7);
+  }
+  .cover-meta span { display: inline-flex; align-items: center; gap: 9px; }
+  .cover-meta svg { color: #FBF6EB; opacity: 0.85; flex: none; }
+
+  /* compact intro section after cover */
+  .intro { padding: 22px 0 6px; }
+  .intro-eyebrow {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--carne); font-weight: 700;
+  }
+  .intro h2 {
+    margin-top: 8px;
+    font-size: clamp(20px, 5vw, 26px);
+    line-height: 1.18;
+  }
+  .intro h2 .nowrap { white-space: nowrap; font-size: clamp(15px, 4vw, 18px); display: inline-block; margin-top: 4px; color: var(--ink-soft); font-weight: 500; }
+  .intro h2 em { font-style: italic; color: var(--carne); font-weight: 500; }
+  .intro p { color: var(--ink-soft); margin-top: 10px; max-width: 38ch; }
+
+  /* search + categories */
+  .finder { margin-top: 26px; }
+  .search {
+    display: flex; align-items: center; gap: 10px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 12px 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .search input {
+    flex: 1; border: 0; outline: 0; background: transparent;
+    font: 500 16px/1.2 "Karla", sans-serif; color: var(--ink);
+  }
+  .search input::placeholder { color: var(--ink-mute); }
+  .search svg { color: var(--ink-mute); flex: none; }
+
+  .cats {
+    display: flex; gap: 8px; margin-top: 14px;
+    overflow-x: auto; padding: 4px 2px 8px;
+    scrollbar-width: none;
+  }
+  .cats::-webkit-scrollbar { display: none; }
+  .cat {
+    flex: none;
+    padding: 9px 14px; border-radius: 99px;
+    border: 1px solid var(--line); background: #fff;
+    font-size: 13.5px; font-weight: 600; color: var(--ink-soft);
+    transition: all .2s ease;
+  }
+  .cat[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  /* ============ SECTION HEADERS ============ */
+  .sect { padding: 36px 0 8px; }
+  .sect-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+  .sect-head h2 { font-size: clamp(24px, 5.5vw, 32px); }
+  .sect-head .kicker {
+    font-size: 11px; color: var(--ink); letter-spacing: 0.16em; text-transform: uppercase;
+    font-weight: 700;
+  }
+  .sect-head em { font-style: italic; color: var(--carne); font-weight: 500; }
+
+  /* ============ PRODUCT GRID ============ */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  /* keep two columns always — vertical / portrait reading */
+
+  .card {
+    position: relative;
+    background: var(--crema);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(217,201,168,0.6);
+    text-align: left;
+    transition: transform .25s ease, box-shadow .25s ease;
+    display: flex; flex-direction: column;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .card-img {
+    aspect-ratio: 4/3; width: 100%;
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0 8px, transparent 8px 16px),
+      linear-gradient(160deg, var(--terra), var(--carne));
+    color: rgba(251,246,235,0.85);
+    display: grid; place-items: center;
+    font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    position: relative;
+  }
+  .card-img.has-photo {
+    background: var(--paper-2);
+    background-image: none;
+  }
+  .card-img.has-photo img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .card-img.cerdo  { background: repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0 8px, transparent 8px 16px), linear-gradient(160deg, #D9A07A, #9E5839); }
+  .card-img.pollo  { background: repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0 8px, transparent 8px 16px), linear-gradient(160deg, #E6B66A, #B07A2B); }
+  .card-img.menud  { background: repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0 8px, transparent 8px 16px), linear-gradient(160deg, #9A3C36, #5A1F1B); }
+  .card-img .ph-label {
+    position: absolute; bottom: 10px; left: 12px;
+    padding: 3px 7px; border-radius: 99px;
+    background: rgba(43,27,17,0.45); color: #FBF6EB;
+    font-size: 9.5px; letter-spacing: 0.18em;
+  }
+  .card-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .card-tag {
+    font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-mute); font-weight: 600;
+  }
+  .badge-innov {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 9px; border-radius: 99px;
+    background: linear-gradient(135deg, #8B2020 0%, var(--carne) 100%);
+    color: #FBF6EB; font-size: 9px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase; font-family: Karla, sans-serif;
+    box-shadow: 0 1px 6px rgba(166,52,42,0.28);
+  }
+  .badge-innov::before { content: "✦"; font-size: 8px; }
+  .card-title {
+    font-family: "Lora", serif; font-size: 18px; line-height: 1.15;
+    color: var(--ink); font-weight: 600;
+  }
+  .card-cta {
+    margin-top: auto;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600; color: var(--carne-deep);
+    padding-top: 8px;
+  }
+  .card-cta .arrow { transition: transform .25s ease; }
+  .card:hover .card-cta .arrow { transform: translateX(3px); }
+
+  .card-recipes-cta {
+    font-family: "Lora", serif;
+    font-size: 16px; font-weight: 600; color: var(--carne);
+    line-height: 1.28;
+    padding: 14px 14px 13px;
+    border-bottom: 1px solid rgba(217,201,168,0.55);
+  }
+  .card-recipes-cta .arrow { display: inline-block; transition: transform .25s ease; }
+  .card:hover .card-recipes-cta .arrow { transform: translateX(3px); }
+
+  /* ============ DETAIL MODAL ============ */
+  .modal {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(43,27,17,0.55);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: stretch; justify-content: center;
+    overflow-y: auto;
+  }
+  .modal[aria-hidden="false"] { display: flex; }
+  .modal-card {
+    background: var(--paper);
+    width: 100%; max-width: 720px;
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp .35s cubic-bezier(.2,.7,.2,1);
+    min-height: 100%;
+  }
+  @media (min-width: 720px) {
+    .modal { padding: 28px; }
+    .modal-card { border-radius: var(--radius-l); min-height: auto; margin: auto; }
+  }
+  @keyframes slideUp { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+  .modal-head {
+    position: sticky; top: 0; z-index: 5;
+    background: var(--paper);
+    padding: 14px 18px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+  }
+  .modal-head .crumb { font-size: 12px; color: var(--ink-mute); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+  .close-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: #fff; border: 1px solid var(--line);
+    display: grid; place-items: center;
+  }
+
+  .modal-hero {
+    aspect-ratio: 16/10;
+    position: relative;
+    color: #FBF6EB;
+    display: grid; place-items: end;
+    padding: 22px;
+    overflow: hidden;
+  }
+  .modal-hero.has-photo img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    z-index: 0;
+  }
+  .modal-hero.has-photo {
+    background: linear-gradient(180deg, var(--paper-2) 0%, var(--paper) 60%, var(--ink) 130%);
+  }
+  .modal-hero.has-photo::after {
+    background: linear-gradient(180deg, transparent 50%, rgba(43,27,17,0.85));
+  }
+  .modal-hero::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(43,27,17,0.55));
+    pointer-events: none;
+  }
+  .modal-hero > * { position: relative; z-index: 1; }
+  .modal-hero h2 {
+    color: #FBF6EB; font-size: clamp(28px, 7vw, 40px); line-height: 1.05;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.3);
+  }
+  .modal-hero .cat-pill {
+    display: inline-block; padding: 4px 10px; border-radius: 99px;
+    background: rgba(251,246,235,0.18); border: 1px solid rgba(251,246,235,0.32);
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600;
+    margin-bottom: 10px;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-body { padding: 4px 18px 24px; }
+  .block { padding: 22px 0; border-bottom: 1px dashed var(--line); }
+  .block:last-child { border-bottom: 0; }
+  .block-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .block-head .glyph {
+    width: 34px; height: 34px; border-radius: 10px;
+    display: grid; place-items: center; flex: none;
+    background: rgba(166,52,42,0.08); color: var(--carne-deep);
+    border: 1px solid rgba(166,52,42,0.18);
+  }
+  .block-head .glyph svg { display: block; }
+  .block-head h3 { font-size: 18px; }
+  .block p { margin: 8px 0; color: var(--ink-soft); }
+
+  .keyvals { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .kv {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius-s);
+    padding: 10px 12px;
+  }
+  .kv .k { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); font-weight: 600; }
+  .kv .v { font-family: "Lora", serif; font-size: 17px; color: var(--ink); margin-top: 2px; }
+  .kv .v small { font-family: "Karla", sans-serif; font-size: 12px; color: var(--ink-mute); font-weight: 500; }
+
+  .traits { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .trait {
+    background: var(--crema); border: 1px solid var(--line); border-radius: 99px;
+    padding: 6px 11px; font-size: 12.5px; color: var(--ink-soft); font-weight: 500;
+  }
+  .trait b { color: var(--ink); font-weight: 600; }
+
+  .signals { list-style: none; padding: 0; margin: 10px 0 0; }
+  .signals li {
+    display: flex; gap: 10px; padding: 6px 0;
+    font-size: 14.5px; color: var(--ink-soft);
+  }
+  .signals li::before {
+    content: "✕"; color: var(--carne); font-weight: 700; flex: none; width: 18px; text-align: center;
+  }
+
+  .tips { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .tip {
+    background: #fff; border-left: 3px solid var(--carne); border-radius: 4px 12px 12px 4px;
+    padding: 12px 14px; box-shadow: var(--shadow-sm);
+  }
+  .tip .who { font-size: 11px; color: var(--ink-mute); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+  .tip p { margin: 0; color: var(--ink); }
+
+  .dishes { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 10px; }
+  @media (min-width: 520px) { .dishes { grid-template-columns: 1fr 1fr; } }
+  .dish-pill {
+    text-align: left; width: 100%;
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius-s);
+    padding: 12px 14px;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    transition: all .2s ease;
+  }
+  .dish-pill:hover { border-color: var(--carne); transform: translateX(2px); }
+  .dish-pill .name { font-family: "Lora", serif; font-size: 16px; color: var(--ink); }
+  .dish-pill .chef { font-size: 11px; color: var(--ink-mute); margin-top: 2px; }
+  .dish-pill .arrow { color: var(--carne); flex: none; }
+
+  /* ============ RECIPE VIEW ============ */
+  .recipe-hero {
+    aspect-ratio: 16/9;
+    position: relative;
+    color: #FBF6EB;
+    display: grid; place-items: end;
+    padding: 22px;
+    overflow: hidden;
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0 10px, transparent 10px 20px),
+      linear-gradient(160deg, #5A4536, #2B1B11);
+  }
+  .recipe-hero.has-photo {
+    background: var(--recipe-img) var(--recipe-pos, center) / cover no-repeat, #2B1B11;
+  }
+  .recipe-hero.has-photo::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(43,27,17,0.10) 0%, rgba(43,27,17,0.20) 40%, rgba(43,27,17,0.85) 100%);
+  }
+  .recipe-hero > * { position: relative; z-index: 1; }
+  .recipe-hero::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 30%, rgba(43,27,17,0.7));
+  }
+  .recipe-hero > * { position: relative; z-index: 1; }
+  .recipe-hero .chef-credit {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(251,246,235,0.14); border: 1px solid rgba(251,246,235,0.28);
+    padding: 5px 12px 5px 5px; border-radius: 99px;
+    font-size: 12px; backdrop-filter: blur(4px);
+    margin-bottom: 12px;
+  }
+  .recipe-hero .chef-credit {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: rgba(251,246,235,0.10);
+    border: 1px solid rgba(251,246,235,0.22);
+    padding: 6px 16px 6px 6px;
+    border-radius: 99px;
+    font-size: 12px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    margin-bottom: 14px;
+  }
+  .recipe-hero .chef-credit .chef-stack {
+    display: flex; flex-direction: column; line-height: 1.15;
+  }
+  .recipe-hero .chef-credit .chef-stack .k {
+    font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(251,246,235,0.6); font-weight: 600;
+  }
+  .recipe-hero .chef-credit .chef-stack .name {
+    font-family: "Lora", serif; font-size: 14.5px; color: #FBF6EB; font-weight: 500;
+    margin-top: 2px;
+  }
+
+  /* ===== Sello chef estilo D ===== */
+  .chef-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    flex: none;
+    background: #fff;
+    border: 1px dashed var(--carne);
+    padding: 3px;
+    display: grid; place-items: center;
+  }
+  .chef-avatar .seal {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: var(--carne);
+    color: #FBF6EB;
+    display: grid; place-items: center;
+    font-family: "Lora", serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    position: relative;
+  }
+  .chef-avatar .seal::before {
+    content: "CHEF"; position: absolute; top: 5px; left: 0; right: 0;
+    text-align: center; font-family: "Karla", sans-serif; font-style: normal;
+    font-size: 5.5px; letter-spacing: 0.32em; color: rgba(251,246,235,0.78);
+    font-weight: 700;
+  }
+  .chef-avatar .seal::after {
+    content: "PER\00DA"; position: absolute; bottom: 5px; left: 0; right: 0;
+    text-align: center; font-family: "Karla", sans-serif; font-style: normal;
+    font-size: 5.5px; letter-spacing: 0.32em; color: rgba(251,246,235,0.78);
+    font-weight: 700;
+  }
+
+  /* mini variant for recipe browser cards */
+  .chef-avatar.mini {
+    width: 34px; height: 34px; padding: 2px;
+    border: 1px dashed var(--carne);
+  }
+  .chef-avatar.mini .seal { font-size: 12px; }
+  .chef-avatar.mini .seal::before,
+  .chef-avatar.mini .seal::after { display: none; }
+
+  .meta-strip {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    background: #fff; border-bottom: 1px solid var(--line);
+  }
+  .meta-strip .mi {
+    padding: 14px 12px; text-align: center;
+    border-right: 1px solid var(--line);
+  }
+  .meta-strip .mi:last-child { border-right: 0; }
+  .meta-strip .mi .lbl { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); font-weight: 600; }
+  .meta-strip .mi .val { font-family: "Lora", serif; font-size: 18px; color: var(--ink); margin-top: 2px; }
+
+  .ing-list { list-style: none; padding: 0; margin: 10px 0 0; }
+  .ing-list li {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px dotted rgba(217,201,168,0.7);
+    font-size: 15px;
+  }
+  .ing-list li:last-child { border-bottom: 0; }
+  .ing-list .qty {
+    flex: none; min-width: 80px;
+    font-family: "Lora", serif; font-weight: 600; color: var(--carne-deep); font-size: 15px;
+  }
+  .ing-list .it { color: var(--ink); }
+  .ing-list .star { color: var(--carne); font-size: 11px; margin-left: 4px; }
+
+  .steps { list-style: none; padding: 0; margin: 12px 0 0; counter-reset: step; }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 4px 0 18px 44px;
+    color: var(--ink);
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: 0;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--carne); color: #FBF6EB;
+    font-family: "Lora", serif; font-weight: 600;
+    display: grid; place-items: center; font-size: 14px;
+    box-shadow: 0 2px 6px rgba(166,52,42,0.3);
+  }
+  .steps li::after {
+    content: ""; position: absolute; left: 14px; top: 32px; bottom: 6px;
+    width: 2px; background: rgba(166,52,42,0.18);
+  }
+  .steps li:last-child::after { display: none; }
+
+  .recipe-tip {
+    background: linear-gradient(180deg, #FBF6EB, #F2E7D2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+    padding: 16px;
+    margin-top: 14px;
+    position: relative;
+  }
+  .recipe-tip::before {
+    content: "“"; position: absolute; top: -8px; left: 14px;
+    font-family: "Lora", serif; font-size: 50px; color: var(--carne); line-height: 1;
+  }
+  .recipe-tip .who { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); font-weight: 600; }
+  .recipe-tip p { margin: 4px 0 0; color: var(--ink); font-style: italic; font-family: "Lora", serif; font-size: 16px; }
+
+  /* ============ COMBO ============ */
+  .combo {
+    margin-top: 20px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--radius-m);
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  .combo::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(400px 200px at 100% 0%, rgba(251,246,235,0.06), transparent 70%),
+      radial-gradient(300px 200px at 0% 100%, rgba(166,52,42,0.30), transparent 70%);
+    pointer-events: none;
+  }
+  .combo > * { position: relative; }
+  .combo .eyebrow {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: #FBF6EB; font-weight: 700;
+  }
+  .combo h4 {
+    font-family: "Lora", serif; font-size: 22px; font-weight: 600; color: #FBF6EB;
+    margin: 6px 0 4px;
+  }
+  .combo p.sub { color: rgba(251,246,235,0.7); font-size: 14px; margin: 0 0 14px; }
+
+  .combo-items { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+  @media (min-width: 520px) { .combo-items { grid-template-columns: repeat(3,1fr); } }
+  .combo-item {
+    background: rgba(251,246,235,0.06);
+    border: 1px solid rgba(251,246,235,0.12);
+    border-radius: var(--radius-s);
+    padding: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .combo-ico {
+    width: 36px; height: 36px; border-radius: 8px; flex: none;
+    background: rgba(166,52,42,0.55);
+    border: 1px solid rgba(251,246,235,0.18);
+    color: #FBF6EB;
+    display: grid; place-items: center; font-size: 18px;
+  }
+  .combo-item .name { font-size: 13.5px; color: #FBF6EB; }
+  .combo-item .qty  { font-size: 11px; color: rgba(251,246,235,0.6); }
+
+  .combo-cta {
+    margin-top: 16px;
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #FBF6EB; color: var(--carne-deep);
+    padding: 12px 18px; border-radius: 99px;
+    font-weight: 700; font-size: 14px;
+    box-shadow: 0 8px 24px -8px rgba(251,246,235,0.4);
+  }
+
+  /* ============ RECIPES SECTION (BROWSE) ============ */
+  .recipe-card {
+    display: flex; gap: 14px; align-items: stretch;
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-m); padding: 12px;
+    box-shadow: var(--shadow-sm);
+    width: 100%; text-align: left;
+    transition: all .25s ease;
+  }
+  .recipe-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .recipe-thumb {
+    width: 96px; flex: none;
+    border-radius: var(--radius-s);
+    aspect-ratio: 1/1;
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0 6px, transparent 6px 12px),
+      linear-gradient(160deg, var(--terra), var(--carne-deep));
+    background-size: cover;
+    background-position: center;
+  }
+  .recipe-thumb.has-photo {
+    background: var(--recipe-img) var(--recipe-pos, center) / cover no-repeat;
+  }
+  .recipe-cardbody { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+  .recipe-cardbody .name { font-family: "Lora", serif; font-size: 17px; color: var(--ink); line-height: 1.15; }
+  .recipe-cardbody .chef-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+  .recipe-cardbody .chef-textline .k {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-mute); font-weight: 600;
+  }
+  .recipe-cardbody .chef-textline .v {
+    font-family: "Lora", serif; font-size: 13.5px; color: var(--ink); margin-top: 1px;
+  }
+  .recipe-cardbody .meta { font-size: 12px; color: var(--ink-soft); margin-top: 8px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .recipe-cardbody .meta span { display: inline-flex; align-items: center; gap: 4px; }
+
+  .recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  /* ============ TIENDAS ============ */
+  .tiendas-list { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+  .tienda {
+    display: flex; gap: 14px; align-items: center;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-m);
+    padding: 14px;
+    box-shadow: var(--shadow-sm);
+    text-align: left;
+    width: 100%;
+    transition: all .2s ease;
+  }
+  .tienda:hover { border-color: var(--carne); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .tienda-num {
+    width: 64px; height: 64px; border-radius: 12px; flex: none;
+    overflow: hidden;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    position: relative;
+  }
+  .tienda-num img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .tienda-body { flex: 1; min-width: 0; }
+  .tienda-body .distrito {
+    font-family: "Lora", serif; font-size: 17px; color: var(--ink); line-height: 1.15; font-weight: 600;
+  }
+  .tienda-body .dir {
+    font-size: 13px; color: var(--ink-soft); margin-top: 2px;
+  }
+  .tienda-body .hours {
+    font-size: 11.5px; color: var(--ink-mute); margin-top: 4px; letter-spacing: 0.04em;
+  }
+  .tienda-pin {
+    flex: none; color: var(--ink-mute);
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 60px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 44px 0 30px;
+    position: relative; overflow: hidden;
+  }
+  footer::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(600px 300px at 90% 0%, rgba(166,52,42,0.20), transparent 70%);
+    pointer-events: none;
+  }
+  footer .wrap { position: relative; }
+  .foot-brand { display: flex; align-items: center; gap: 12px; }
+  .foot-brand .brand-name { color: #FBF6EB; }
+  .foot-brand .brand-mark {
+    background: url('assets/fresquicarnes-logo.png') center/contain no-repeat;
+  }
+
+  footer .quote {
+    font-family: "Lora", serif; font-style: italic; font-size: clamp(20px, 5vw, 26px);
+    color: #FBF6EB; max-width: 28ch; line-height: 1.25;
+    margin: 22px 0 6px; text-wrap: pretty;
+  }
+  footer .quote em { color: #FBF6EB; font-style: italic; font-weight: 500; text-decoration: underline; text-decoration-color: var(--carne); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+
+  .socials { display: flex; gap: 10px; margin-top: 18px; }
+  .socials a {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(251,246,235,0.06);
+    border: 1px solid rgba(251,246,235,0.14);
+    display: grid; place-items: center; color: var(--paper);
+  }
+  .qr-note {
+    margin-top: 26px; padding: 14px 16px;
+    background: rgba(251,246,235,0.06);
+    border: 1px dashed rgba(251,246,235,0.22);
+    border-radius: var(--radius-m);
+    display: flex; align-items: center; gap: 12px;
+    color: rgba(251,246,235,0.85); font-size: 13.5px;
+  }
+  .qr-mini {
+    width: 40px; height: 40px; flex: none;
+    background:
+      linear-gradient(#FBF6EB,#FBF6EB) padding-box,
+      conic-gradient(from 0deg, #2B1B11 25%, #FBF6EB 25% 50%, #2B1B11 50% 75%, #FBF6EB 75%);
+    border-radius: 6px;
+    position: relative;
+    background-color: #FBF6EB;
+    background-image:
+      linear-gradient(#2B1B11 2px, transparent 2px),
+      linear-gradient(90deg, #2B1B11 2px, transparent 2px);
+    background-size: 6px 6px;
+  }
+
+  .legal {
+    margin-top: 28px; padding-top: 18px;
+    border-top: 1px solid rgba(251,246,235,0.12);
+    font-size: 12px; color: rgba(251,246,235,0.5);
+    display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+  }
+
+  /* ============ FLOATING JUMP BUTTON ============ */
+  .jump-fab {
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px 14px 18px;
+    border-radius: 99px;
+    background: var(--carne);
+    color: #FBF6EB;
+    font-family: "Karla", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    box-shadow:
+      0 10px 24px -8px rgba(122,31,26,0.55),
+      0 4px 12px -4px rgba(43,27,17,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.18);
+    transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+    opacity: 0;
+    transform: translateY(20px) scale(0.92);
+    pointer-events: none;
+  }
+  @media (min-width: 520px) {
+    .jump-fab { right: 22px; }
+  }
+  .jump-fab.visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+  .jump-fab:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -8px rgba(122,31,26,0.6), 0 6px 14px -4px rgba(43,27,17,0.4), inset 0 1px 0 rgba(255,255,255,0.2); }
+  .jump-fab:active { transform: translateY(0) scale(0.97); }
+  .jump-fab .fab-ico {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: rgba(255,255,255,0.16);
+    display: grid; place-items: center;
+    flex: none;
+  }
+  .jump-fab .fab-label small {
+    display: block;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .jump-fab .fab-label b {
+    display: block;
+    font-family: "Lora", serif;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.05;
+  }
+  /* hide once user has reached / scrolled past recipes */
+  .jump-fab.past { opacity: 0; transform: translateY(20px) scale(0.92); pointer-events: none; }
+
+  /* ============ ANIMATIONS ON SCROLL ============ */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ============ NO RESULTS ============ */
+  .empty {
+    grid-column: 1 / -1;
+    background: #fff; border: 1px dashed var(--line); border-radius: var(--radius-m);
+    padding: 28px; text-align: center; color: var(--ink-mute);
+  }
+
+  /* small util */
+  .sr { position: absolute; left: -9999px; }
+
+  /* ============ RESPONSIVE BREAKPOINTS ============ */
+  @media (min-width: 640px) {
+    .wrap { padding: 0 32px; }
+    .topbar-inner { padding: 12px 32px; }
+    .grid { grid-template-columns: repeat(3, 1fr); }
+    .recipes-grid { grid-template-columns: repeat(3, 1fr); }
+    .cover-inner { padding: 40px 32px 60px; }
+    .search { max-width: 560px; }
+  }
+
+  @media (min-width: 1024px) {
+    .grid { grid-template-columns: repeat(4, 1fr); }
+    .recipes-grid { grid-template-columns: repeat(4, 1fr); }
+    .tiendas-list { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .cover-inner { padding: 60px 48px 88px; max-width: var(--maxw); margin: 0 auto; width: 100%; }
+    .sect { padding: 48px 0 8px; }
+    .brand-name { font-size: 19px; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- =========================== TOP BAR =========================== -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <div>
+        <div class="brand-name">La Sazón de <em>Mamá</em></div>
+        <div class="brand-sub">Por Fresquicarnes</div>
+      </div>
+    </div>
+    <div class="topbar-cta">
+      <span class="dot"></span> Abierto a partir de las 8:30 am
+    </div>
+  </div>
+</header>
+
+<main id="view-home">
+  <!-- =========================== COVER (foto fondo) =========================== -->
+  <section class="cover">
+    <div class="cover-img" aria-hidden="true"></div>
+    <div class="cover-grain" aria-hidden="true"></div>
+    <div class="cover-logo" role="img" aria-label="Fresquicarnes"></div>
+    <div class="cover-inner">
+      <span class="cover-eyebrow">
+        <span class="pulse"></span> Tu compra de hoy
+      </span>
+      <h1>Hoy llevas <em>la sazón de mamá</em>.</h1>
+      <div class="cover-rule"></div>
+      <p class="lead">Lo que quieras, cuando quieras — del carnicero a tu cocina.</p>
+      <div class="cover-store">Una iniciativa de Fresquicarnes</div>
+      <a href="https://wa.me/51965308884?text=Hola%20Fresquicarnes%2C%20quisiera%20hacer%20un%20pedido%20por%20delivery" target="_blank" rel="noopener" class="cover-delivery">
+        <span class="cd-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13l5 5v5h-3"/><circle cx="7.5" cy="17.5" r="2"/><circle cx="17.5" cy="17.5" r="2"/><path d="M9.5 17.5h6"/></svg>
+        </span>
+        <span class="cd-text">
+          <small>Delivery</small>
+          <b>965 308 884</b>
+        </span>
+      </a>
+      <div class="cover-meta">
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-7-4-7-12a7 7 0 0 1 14 0c0 8-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Miraflores · Av. La Mar 652
+        </span>
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-7-4-7-12a7 7 0 0 1 14 0c0 8-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Barranco · Av. Grau 608
+        </span>
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-7-4-7-12a7 7 0 0 1 14 0c0 8-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Miraflores · Av. Benavides 540
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== INTRO + BUSCADOR =========================== -->
+  <section class="intro wrap">
+    <div class="intro-eyebrow">Bienvenido</div>
+    <h2><em>Conoce</em> y <em>cocina</em> tu corte de la mejor manera en <em>casa</em>.</h2>
+    <p>Escoge la categoría o busca tu producto. Cada corte trae su ficha, sus tips y dos recetas peruanas listas para hacer.</p>
+
+    <div class="finder">
+      <label class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="search" type="search" placeholder="Busca tu corte: lomo, costillas, pollo..." aria-label="Buscar producto" />
+      </label>
+      <div class="cats" id="cats" role="tablist"></div>
+    </div>
+  </section>
+
+  <!-- =========================== PRODUCT GRID =========================== -->
+  <section class="sect wrap" id="portafolio">
+    <div class="sect-head">
+      <div>
+        <div class="kicker">Portafolio</div>
+        <h2>Elige <em>tu corte</em></h2>
+      </div>
+    </div>
+    <div class="grid" id="product-grid"></div>
+  </section>
+
+  <!-- =========================== RECIPES BROWSER =========================== -->
+  <section class="sect wrap" id="recetas">
+    <div class="sect-head">
+      <div>
+        <h2>Recetas <em>de casa</em></h2>
+      </div>
+    </div>
+    <div class="recipes-grid" id="recipes-grid"></div>
+  </section>
+
+  <!-- =========================== TIENDAS =========================== -->
+  <section class="sect wrap" id="tiendas">
+    <div class="sect-head">
+      <div>
+        <div class="kicker">Dónde estamos</div>
+        <h2>Nuestras <em>tiendas</em></h2>
+      </div>
+    </div>
+    <div class="tiendas-list">
+      <a class="tienda" href="https://share.google/E2JU5RTJAbrElCaMH" target="_blank" rel="noopener">
+        <div class="tienda-num"><img src="assets/stores/tienda-1.png" alt="Tienda Fresquicarnes Miraflores · La Mar" /></div>
+        <div class="tienda-body">
+          <div class="distrito">Miraflores · La Mar</div>
+          <div class="dir">Av. La Mar 652</div>
+          <div class="hours">LUN A DOM · 9:00 — 20:00</div>
+        </div>
+        <svg class="tienda-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="tienda" href="https://share.google/FzIlFyT1V58nRIKas" target="_blank" rel="noopener">
+        <div class="tienda-num"><img src="assets/stores/tienda-2.png" alt="Tienda Fresquicarnes Barranco · Grau" /></div>
+        <div class="tienda-body">
+          <div class="distrito">Barranco · Grau</div>
+          <div class="dir">Av. Grau 608</div>
+          <div class="hours">LUN A DOM · 9:00 — 20:00</div>
+        </div>
+        <svg class="tienda-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="tienda" href="https://share.google/eVkc2wgSN0WXu9IGJ" target="_blank" rel="noopener">
+        <div class="tienda-num"><img src="assets/stores/tienda-3.png" alt="Tienda Fresquicarnes Miraflores · Benavides" /></div>
+        <div class="tienda-body">
+          <div class="distrito">Miraflores · Benavides</div>
+          <div class="dir">Av. Benavides 540</div>
+          <div class="hours">LUN A DOM · 9:00 — 20:00</div>
+        </div>
+        <svg class="tienda-pin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================== FOOTER =========================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <div>
+        <div class="brand-name" style="color:#FBF6EB">La Sazón de <em>Mamá</em></div>
+        <div class="brand-sub" style="color:rgba(251,246,235,0.5)">Por Fresquicarnes</div>
+      </div>
+    </div>
+
+    <p class="quote">Porque alimentar bien a tu familia es el <em>mayor acto de amor</em>.</p>
+
+    <div class="socials" aria-label="Redes sociales">
+      <a href="https://www.instagram.com/fresquicarnes/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      </a>
+      <a href="https://www.facebook.com/fresquicarnescarniceria/" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7.5c0-1.1.5-2 2-2h2V2h-3c-3 0-5 2-5 5v3H6v4h3v8h4z"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@fresquicarnes" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3v3a5 5 0 0 0 5 5v3a8 8 0 0 1-5-1.7V16a5 5 0 1 1-5-5v3a2 2 0 1 0 2 2V3h3z"/></svg>
+      </a>
+    </div>
+
+    <div class="qr-note">
+      <div class="qr-mini" aria-hidden="true" style="background-image: none; background: var(--carne); display:grid; place-items:center;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FBF6EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13l5 5v5h-3"/><circle cx="7.5" cy="17.5" r="2"/><circle cx="17.5" cy="17.5" r="2"/><path d="M9.5 17.5h6"/></svg>
+      </div>
+      <div>
+        <div style="font-size:10.5px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(251,246,235,0.6); font-weight:700; margin-bottom:2px">Delivery a domicilio</div>
+        <a href="https://wa.me/51965308884?text=Hola%20Fresquicarnes%2C%20quisiera%20hacer%20un%20pedido%20por%20delivery" target="_blank" rel="noopener" style="color:#FBF6EB; font-family:'Lora', serif; font-size:18px; font-weight:600; letter-spacing:0.02em">965 308 884</a>
+      </div>
+    </div>
+
+    <div class="legal">
+      <span>© 2026 La Sazón de Mamá · Fresquicarnes</span>
+      <span>Hecho con cariño en Lima</span>
+    </div>
+  </div>
+</footer>
+
+<!-- =========================== FLOATING JUMP TO RECIPES =========================== -->
+<button class="jump-fab" id="jump-fab" type="button" aria-label="Saltar a recetas">
+  <span class="fab-ico">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </span>
+  <span class="fab-label">
+    <small>Salta a</small>
+    <b>Recetas</b>
+  </span>
+</button>
+
+<!-- =========================== DETAIL MODAL =========================== -->
+<div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card" id="modal-card">
+    <!-- injected -->
+  </div>
+</div>
+
+<!-- =========================== DATA + JS =========================== -->
+<script>
+/* ---------- SVG ICONS (sin emojis) ---------- */
+const SVG = (paths, w=18, h=18) =>
+  `<svg width="${w}" height="${h}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
+const ICONS = {
+  pin:    SVG('<path d="M12 21s-7-7.2-7-12a7 7 0 1 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>'),
+  thermo: SVG('<path d="M14 14.76V4a2 2 0 0 0-4 0v10.76a4 4 0 1 0 4 0z"/>'),
+  star:   SVG('<path d="M12 2.5l2.9 6 6.6.9-4.8 4.7 1.1 6.6L12 17.6l-5.9 3.1 1.1-6.6L2.5 9.4l6.6-.9L12 2.5z"/>'),
+  bulb:   SVG('<path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2v.3h6v-.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/>'),
+  plate:  SVG('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>'),
+  cart:   SVG('<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M3 4h2l2.7 11.4a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.5L21 8H6"/>'),
+  list:   SVG('<path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/><circle cx="4" cy="18" r="1" fill="currentColor"/>'),
+  quote:  SVG('<path d="M7 7h4v4H7zM7 11c0 3 1 4 3 4M13 7h4v4h-4zM13 11c0 3 1 4 3 4"/>'),
+  herb:   SVG('<path d="M11 20s-7-2-7-9a9 9 0 0 1 9-9c0 7-2 9-9 9"/><path d="M4 20l7-9"/>'),
+  clock:  SVG('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', 14, 14),
+  users:  SVG('<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15 20a5 5 0 0 1 6.5-4.8"/>', 14, 14),
+};
+
+/* ---------- CATÉGORIES ---------- */
+const CATS = [
+  { id: "todos",   label: "Todos"       },
+  { id: "res",     label: "Res"         },
+  { id: "cerdo",   label: "Cerdo"       },
+  { id: "pollo",   label: "Pollo"       },
+  { id: "menud",   label: "Menudencias" },
+];
+
+/* ---------- RECETAS (referenciadas por id) ---------- *
+   Chefs peruanos reconocidos como referencias — créditos respetuosos.
+*/
+const RECIPES = {
+  lomo_saltado: {
+    id: "lomo_saltado",
+    img: "assets/recipes/lomo-saltado.png",
+    nombre: "Lomo saltado",
+    chef: { nombre: "Gastón Acurio", iniciales: "GA", linea: "Inspirado en la cocina criolla de Gastón Acurio" },
+    prep: 15, coccion: 12, porciones: 4,
+    ingredientes: [
+      { qty: "600 g", it: "de lomo fino en tiras Fresquicarnes", clave: true },
+      { qty: "2 unid", it: "de tomate en gajos" },
+      { qty: "1 unid", it: "de cebolla roja en pluma" },
+      { qty: "1 unid", it: "de ají amarillo en tiras", clave: true },
+      { qty: "3 dientes", it: "de ajo picado" },
+      { qty: "2 cdas", it: "de sillao (salsa de soya)" },
+      { qty: "1 chorro", it: "de vinagre tinto" },
+      { qty: "1 atado", it: "de culantro picado" },
+      { qty: "1 taza", it: "de papas en bastones (fritas)" },
+      { qty: "Al gusto", it: "sal, pimienta y comino" },
+    ],
+    pasos: [
+      "Salpimienta tu lomo y déjalo descansar 10 minutos. Esto le da más sabor cuando lo saltees.",
+      "Calienta una sartén grande a fuego fuerte con un chorrito de aceite. Cuando humee, echa la carne y séllala 2 minutos sin moverla mucho.",
+      "Agrega el ajo, la cebolla y el ají amarillo. Saltea 2 minutos más, que la cebolla quede crocante por fuera y tierna por dentro.",
+      "Suma el tomate, el sillao y el chorrito de vinagre. Mueve todo con cariño un minuto, sin dejar que el tomate se deshaga.",
+      "Apaga el fuego, echa el culantro picado y mezcla con las papas fritas todavía calientes.",
+      "Sirve enseguida con arroz blanco al lado. Se come al toque, no esperes."
+    ],
+    tip: "El secreto está en el fuego fuerte y la sartén bien caliente: si está tibia, la carne suda y queda hervida, no salteada.",
+    falta: ["Ají amarillo fresco", "Papas amarillas para freír", "Culantro de mercado"]
+  },
+
+  seco_de_res: {
+    id: "seco_de_res",
+    img: "assets/recipes/seco-de-res.png",
+    nombre: "Seco de res norteño",
+    chef: { nombre: "Cucho La Rosa", iniciales: "CL", linea: "Basado en la cocina norteña de Cucho La Rosa" },
+    prep: 20, coccion: 90, porciones: 6,
+    ingredientes: [
+      { qty: "1 kg", it: "de asado de tira o pecho de res Fresquicarnes", clave: true },
+      { qty: "1 taza", it: "de culantro licuado", clave: true },
+      { qty: "1 unid", it: "de cebolla roja grande picada" },
+      { qty: "4 dientes", it: "de ajo picado" },
+      { qty: "2 cdas", it: "de ají amarillo licuado" },
+      { qty: "1 botella", it: "de chicha de jora (o cerveza negra)" },
+      { qty: "1 taza", it: "de zapallo loche rallado (opcional)" },
+      { qty: "2 unid", it: "de zanahoria en cubos" },
+      { qty: "1 taza", it: "de arvejas frescas" },
+      { qty: "Al gusto", it: "sal, pimienta, comino" },
+    ],
+    pasos: [
+      "Dora la carne en una olla con aceite caliente, hasta que tome color por todos lados. Retira y reserva.",
+      "En la misma olla, echa la cebolla, ajo y ají amarillo. Cocina hasta que la cebolla se vuelva transparente.",
+      "Devuelve la carne a la olla, agrega el culantro licuado y la chicha de jora. Si usas loche, échalo aquí.",
+      "Tapa y cocina a fuego lento 1 hora y 15 minutos, hasta que la carne esté tan suave que se desmenuce con tenedor.",
+      "Suma la zanahoria y las arvejas en los últimos 15 minutos para que no se deshagan.",
+      "Sirve con arroz blanco, frejol canario y una rodaja de yuca sancochada. Acompaña con zarza de cebolla."
+    ],
+    tip: "El culantro se licúa solo con la hoja, sin tallo. El tallo amarga el seco — un error muy común de cocina nueva.",
+    falta: ["Culantro fresco en atado", "Ají amarillo", "Frejol canario"]
+  },
+
+  costillas_bbq: {
+    id: "costillas_bbq",
+    img: "assets/recipes/costillas-bbq.png",
+    nombre: "Costillas de res a la olla",
+    chef: { nombre: "Nora Sugobono", iniciales: "NS", linea: "Inspirado en las recetas caseras de Nora Sugobono" },
+    prep: 15, coccion: 120, porciones: 5,
+    ingredientes: [
+      { qty: "1.2 kg", it: "de costillas de res en trozos Fresquicarnes", clave: true },
+      { qty: "1 unid", it: "de cebolla blanca grande" },
+      { qty: "4 dientes", it: "de ajo" },
+      { qty: "2 cdas", it: "de pasta de tomate" },
+      { qty: "2 cdas", it: "de panela rallada o azúcar rubia" },
+      { qty: "2 cdas", it: "de sillao" },
+      { qty: "1 cda", it: "de mostaza" },
+      { qty: "1 taza", it: "de caldo de res" },
+      { qty: "2 hojas", it: "de laurel" },
+      { qty: "Al gusto", it: "sal y pimienta" },
+    ],
+    pasos: [
+      "Sazona las costillas con sal y pimienta. Dóralas en una olla a fuego fuerte, sin amontonar.",
+      "Saca las costillas y baja el fuego. En el mismo jugo, sofríe la cebolla picada y el ajo.",
+      "Agrega la pasta de tomate, la panela, el sillao y la mostaza. Mueve un minuto para que se integre.",
+      "Devuelve las costillas, echa el caldo y el laurel. Tapa y cocina a fuego muy bajo durante 2 horas.",
+      "A la mitad de la cocción, voltea las costillas para que la salsa las abrace por todos lados.",
+      "Antes de servir, sube el fuego 5 minutos para reducir la salsa hasta que brille y se pegue a la carne."
+    ],
+    tip: "Si la salsa queda muy aguada al final, retira las costillas y déjala reducir sola. Nunca le pongas harina — pierde el brillo natural.",
+    falta: ["Panela rallada", "Mostaza casera", "Laurel fresco"]
+  },
+
+  asado_tira_parrilla: {
+    id: "asado_tira_parrilla",
+    img: "assets/recipes/asado-tira-parrilla.png",
+    nombre: "Asado de tira a la parrilla",
+    chef: { nombre: "Cucho La Rosa", iniciales: "CL", linea: "Receta basada en la propuesta de Cucho La Rosa" },
+    prep: 10, coccion: 25, porciones: 4,
+    ingredientes: [
+      { qty: "1 kg", it: "de asado de tira en trozos gruesos Fresquicarnes", clave: true },
+      { qty: "Al gusto", it: "sal gruesa", clave: true },
+      { qty: "1 unid", it: "de limón (opcional, al servir)" },
+      { qty: "1 atado", it: "de hierbabuena (para chimichurri)" },
+      { qty: "1 atado", it: "de perejil" },
+      { qty: "3 dientes", it: "de ajo (para chimichurri)" },
+      { qty: "1/2 taza", it: "de aceite de oliva" },
+      { qty: "2 cdas", it: "de vinagre tinto" },
+      { qty: "1 cdta", it: "de ají panca en pasta" },
+    ],
+    pasos: [
+      "Saca el asado de la refrigeradora 40 minutos antes. La carne fría se quema por fuera y queda cruda por dentro.",
+      "Prepara el chimichurri: pica fino el perejil, hierbabuena y ajo. Mezcla con aceite, vinagre y ají panca. Reserva.",
+      "Sazona la carne solo con sal gruesa, por ambos lados.",
+      "Carbón listo: cuando esté blanco y sin llama. Pon el asado y deja 10 minutos sin tocar.",
+      "Voltea y cocina 8 a 10 minutos más. El centro debe estar rosado, no rojo.",
+      "Retira, deja descansar 5 minutos sobre una tabla antes de cortar. Sirve con el chimichurri encima."
+    ],
+    tip: "Nunca pinches la carne con tenedor en la parrilla — pierdes los jugos. Usa pinzas siempre.",
+    falta: ["Sal gruesa", "Hierbabuena fresca", "Ají panca en pasta"]
+  },
+
+  bife_chorizo: {
+    id: "bife_chorizo",
+    img: "assets/recipes/bife-chorizo.png",
+    nombre: "Bife a la sartén con cebolla caramelizada",
+    chef: { nombre: "Sandra Plevisani", iniciales: "SP", linea: "Inspirado en la cocina hogareña de Sandra Plevisani" },
+    prep: 10, coccion: 15, porciones: 2,
+    ingredientes: [
+      { qty: "2 unid", it: "de bife de chorizo Fresquicarnes (400 g c/u)", clave: true },
+      { qty: "2 unid", it: "de cebolla blanca en pluma" },
+      { qty: "2 cdas", it: "de mantequilla" },
+      { qty: "1 cda", it: "de azúcar rubia" },
+      { qty: "1 ramita", it: "de romero fresco" },
+      { qty: "1 chorro", it: "de aceite vegetal" },
+      { qty: "Al gusto", it: "sal en escamas y pimienta" },
+    ],
+    pasos: [
+      "Saca los bifes de la refrigeradora 30 minutos antes. Sécalos con papel — la humedad impide el dorado.",
+      "En una sartén aparte, derrite la mantequilla y echa la cebolla. Cocina a fuego bajo 15 minutos, agregando el azúcar al final.",
+      "En otra sartén grande, calienta el aceite hasta que humee. Sazona los bifes con sal y pimienta.",
+      "Sella los bifes 3 minutos por cada lado para término medio. Añade el romero los últimos 2 minutos.",
+      "Retira, cubre con papel aluminio y deja reposar 5 minutos. Es importante, no te saltes este paso.",
+      "Sirve cada bife con un montón de cebolla caramelizada encima y una pizca de sal en escamas."
+    ],
+    tip: "El bife necesita una sartén muy caliente y aceite que humee. Si pones la carne y no suena 'tssss' fuerte, sácala y espera.",
+    falta: ["Romero fresco", "Sal en escamas", "Mantequilla con sal"]
+  },
+
+  cerdo_horno: {
+    id: "cerdo_horno",
+    img: "assets/recipes/cerdo-horno.png",
+    nombre: "Pierna de cerdo al horno con chicha",
+    chef: { nombre: "Gastón Acurio", iniciales: "GA", linea: "Receta basada en la propuesta de Gastón Acurio" },
+    prep: 20, coccion: 180, porciones: 8,
+    ingredientes: [
+      { qty: "2.5 kg", it: "de pierna de cerdo con hueso Fresquicarnes", clave: true },
+      { qty: "1 botella", it: "de chicha de jora", clave: true },
+      { qty: "6 dientes", it: "de ajo molido" },
+      { qty: "3 cdas", it: "de ají panca", clave: true },
+      { qty: "2 cdas", it: "de comino" },
+      { qty: "2 cdas", it: "de vinagre tinto" },
+      { qty: "1 cda", it: "de sal" },
+      { qty: "2 unid", it: "de cebolla en gajos" },
+      { qty: "1 atado", it: "de hierbabuena" },
+    ],
+    pasos: [
+      "Mezcla ajo, ají panca, comino, vinagre y sal en un bol. Embárrale a la pierna por todos lados — métele en cada hueco.",
+      "Deja marinar tapada en la refrigeradora desde la noche anterior. Mínimo 6 horas, ideal toda la noche.",
+      "Precalienta el horno a 180°C. Acomoda la pierna en una fuente con las cebollas debajo y la hierbabuena.",
+      "Echa media botella de chicha al fondo y tapa con papel aluminio. Hornea 2 horas.",
+      "Destapa, baña con el jugo de la fuente y sube a 200°C. Hornea 30 minutos más hasta que la piel quede dorada y crocante.",
+      "Saca, deja reposar 15 minutos antes de cortar. Sirve con tamalitos verdes y zarza criolla."
+    ],
+    tip: "Si la piel no quiere dorar al final, prende solo el grill 5 minutos y vigila — se quema rapidísimo.",
+    falta: ["Ají panca en pasta", "Chicha de jora", "Hierbabuena fresca"]
+  },
+
+  chuletas_sarten: {
+    id: "chuletas_sarten",
+    img: "assets/recipes/chuletas-sarten.png",
+    nombre: "Chuletas de cerdo a la sartén con manzana",
+    chef: { nombre: "Sandra Plevisani", iniciales: "SP", linea: "Inspirado en la cocina hogareña de Sandra Plevisani" },
+    prep: 10, coccion: 18, porciones: 4,
+    ingredientes: [
+      { qty: "4 unid", it: "de chuletas de cerdo Fresquicarnes", clave: true },
+      { qty: "2 unid", it: "de manzana verde en gajos" },
+      { qty: "1 cda", it: "de mostaza" },
+      { qty: "2 cdas", it: "de mantequilla" },
+      { qty: "1 chorro", it: "de aceite de oliva" },
+      { qty: "1 cda", it: "de romero fresco" },
+      { qty: "1 cdta", it: "de azúcar rubia" },
+      { qty: "Al gusto", it: "sal y pimienta" },
+    ],
+    pasos: [
+      "Sazona las chuletas con sal, pimienta y un poquito de mostaza por encima.",
+      "Calienta el aceite con una cucharada de mantequilla. Cuando burbujee, echa las chuletas.",
+      "Cocina 4 minutos de cada lado. No las muevas mucho — déjalas formar costra.",
+      "Retira y reserva tapadas. En la misma sartén, echa la mantequilla restante y las manzanas con azúcar.",
+      "Cocina 5 minutos hasta que las manzanas estén suaves y doradas. Suma el romero al final.",
+      "Sirve cada chuleta con manzanas encima y un chorrito del jugo de la sartén."
+    ],
+    tip: "El cerdo seco no es porque cocinaste mucho — es porque no descansó. Apaga el fuego apenas las saques.",
+    falta: ["Manzana verde", "Romero fresco", "Mostaza casera"]
+  },
+
+  chuleta_parrilla: {
+    id: "chuleta_parrilla",
+    img: "assets/recipes/chuleta-parrilla.png",
+    nombre: "Chuleta de cerdo a la parrilla",
+    chef: { nombre: "Cucho La Rosa", iniciales: "CL", linea: "Inspirado en la cocina criolla de Cucho La Rosa" },
+    prep: 10, coccion: 12, porciones: 4,
+    ingredientes: [
+      { qty: "4 unid", it: "de chuletas de cerdo Fresquicarnes", clave: true },
+      { qty: "4 dientes", it: "de ajo molido" },
+      { qty: "1 cda", it: "de ají panca en pasta" },
+      { qty: "1 cda", it: "de sillao" },
+      { qty: "1 cdta", it: "de comino" },
+      { qty: "1 chorro", it: "de aceite de oliva" },
+      { qty: "1 unid", it: "de limón (al servir)" },
+      { qty: "Al gusto", it: "sal gruesa y pimienta" },
+    ],
+    pasos: [
+      "Saca las chuletas de la refri 30 minutos antes. La carne tibia se cocina pareja.",
+      "Mezcla ajo, ají panca, sillao, comino y aceite. Embarra las chuletas por ambos lados y deja marinar 30 minutos.",
+      "Calienta la parrilla o plancha bien fuerte. Cuando humee, está lista.",
+      "Pon las chuletas y cócinalas 4 a 5 minutos por lado, sin moverlas para que tomen marca.",
+      "Sazona con sal gruesa apenas las retires. Deja reposar 3 minutos sobre tabla antes de servir.",
+      "Sirve con un chorrito de limón, papas asadas y una ensalada fresca."
+    ],
+    tip: "Cerdo cocinado a la parrilla debe quedar apenas rosado por dentro — si lo pasas, queda seco. Confía en la cocción corta.",
+    falta: ["Ají panca en pasta", "Sal gruesa", "Limón sutil"]
+  },
+
+  panceta_crocante: {
+    id: "panceta_crocante",
+    img: "assets/recipes/panceta-crocante.png",
+    nombre: "Panceta crocante al horno",
+    chef: { nombre: "Gastón Acurio", iniciales: "GA", linea: "Inspirado en la cocina de Gastón Acurio" },
+    prep: 10, coccion: 150, porciones: 6,
+    ingredientes: [
+      { qty: "1.5 kg", it: "de panceta de cerdo con piel Fresquicarnes", clave: true },
+      { qty: "2 cdas", it: "de sal gruesa", clave: true },
+      { qty: "1 cda", it: "de pimienta entera" },
+      { qty: "4 dientes", it: "de ajo aplastado" },
+      { qty: "1 cda", it: "de comino" },
+      { qty: "1 chorro", it: "de vinagre blanco" },
+      { qty: "1 atado", it: "de hierbabuena" },
+    ],
+    pasos: [
+      "Con un cuchillo bien filudo, hazle cortes a la piel de la panceta formando rombos. Sin llegar a la carne.",
+      "Riega vinagre blanco sobre la piel y sécala con papel toalla. Eso ayuda a que reviente.",
+      "Mezcla sal gruesa, pimienta, ajo y comino. Frota toda la panceta — piel arriba.",
+      "Hornea a 160°C durante 2 horas, sobre rejilla con bandeja debajo para los jugos.",
+      "Sube el horno a 220°C los últimos 20-25 minutos, vigilando. La piel debe inflarse y sonar 'crack' al tocar.",
+      "Deja reposar 10 minutos antes de cortar. Sirve con yuca, ají de huacatay y zarza."
+    ],
+    tip: "Si te queda piel correosa, no le pongas más calor por arriba — secala mejor antes de hornear la próxima vez.",
+    falta: ["Sal gruesa", "Yuca fresca", "Huacatay"]
+  },
+
+  aji_gallina: {
+    id: "aji_gallina",
+    img: "assets/recipes/aji-gallina.png",
+    nombre: "Ají de gallina",
+    chef: { nombre: "Nora Sugobono", iniciales: "NS", linea: "Receta basada en la propuesta de Nora Sugobono" },
+    prep: 15, coccion: 45, porciones: 6,
+    ingredientes: [
+      { qty: "600 g", it: "de pechuga de pollo Fresquicarnes sancochada y deshilachada", clave: true },
+      { qty: "1 unid", it: "de cebolla blanca picada" },
+      { qty: "4 dientes", it: "de ajo molido" },
+      { qty: "4 cdas", it: "de ají amarillo licuado", clave: true },
+      { qty: "1 taza", it: "de leche evaporada" },
+      { qty: "4 rebanadas", it: "de pan de molde sin corteza" },
+      { qty: "1/2 taza", it: "de queso parmesano rallado" },
+      { qty: "1/4 taza", it: "de pecanas o nueces molidas" },
+      { qty: "Al gusto", it: "sal, pimienta, comino" },
+      { qty: "Para acompañar", it: "papa amarilla sancochada, huevo duro, aceituna" },
+    ],
+    pasos: [
+      "Remoja el pan en un poquito de leche. Reserva. Guarda el caldo del pollo, lo vas a necesitar.",
+      "En una olla, sofríe la cebolla con el ajo hasta que esté transparente. Echa el ají amarillo y cocina 5 minutos más.",
+      "Suma el pan remojado y deshecho. Cocina 3 minutos moviendo. Si se seca, agrega caldo.",
+      "Echa el pollo deshilachado, la leche evaporada y las pecanas. Mueve con calma.",
+      "Apaga el fuego, agrega el parmesano y rectifica sal y pimienta. Debe quedar cremoso, ni espeso ni aguado.",
+      "Sirve sobre papa amarilla sancochada, con medio huevo duro, aceituna negra y arroz blanco al lado."
+    ],
+    tip: "Si te queda muy picante el ají, échale más leche evaporada y un pedacito de pan extra. Suaviza al toque.",
+    falta: ["Ají amarillo", "Papa amarilla", "Aceitunas botija"]
+  },
+
+  pollo_al_horno: {
+    id: "pollo_al_horno",
+    img: "assets/recipes/pollo-al-horno.png",
+    nombre: "Pollo entero al horno con limón",
+    chef: { nombre: "Sandra Plevisani", iniciales: "SP", linea: "Inspirado en la cocina familiar de Sandra Plevisani" },
+    prep: 15, coccion: 70, porciones: 5,
+    ingredientes: [
+      { qty: "1 unid", it: "de pollo entero Fresquicarnes (1.8 kg aprox)", clave: true },
+      { qty: "2 unid", it: "de limones partidos a la mitad" },
+      { qty: "5 dientes", it: "de ajo" },
+      { qty: "2 cdas", it: "de mantequilla blanda" },
+      { qty: "1 cda", it: "de páprika" },
+      { qty: "1 atado", it: "de romero" },
+      { qty: "Al gusto", it: "sal y pimienta" },
+      { qty: "4 unid", it: "de papas amarillas para asar" },
+    ],
+    pasos: [
+      "Seca bien el pollo por dentro y por fuera con papel. La piel seca es la que queda crocante.",
+      "Mezcla la mantequilla con páprika, ajo molido, sal y pimienta. Mete los dedos entre la piel y la pechuga y embarra esta mezcla ahí dentro.",
+      "Rellena la cavidad del pollo con los limones partidos, los ajos enteros y el romero.",
+      "Acomoda en una bandeja con las papas alrededor. Hornea a 200°C durante 1 hora.",
+      "A los 40 minutos, baña el pollo con su propio jugo. Si está dorando muy rápido, cubre con papel aluminio.",
+      "Saca cuando al pinchar el muslo el jugo salga transparente. Reposa 10 minutos antes de trinchar."
+    ],
+    tip: "Si quieres piel extra crocante, échale una pizca de azúcar con la sal al exterior — ayuda a caramelizar.",
+    falta: ["Limón sutil", "Páprika ahumada", "Papa amarilla"]
+  },
+
+  pollo_brasa: {
+    id: "pollo_brasa",
+    img: "assets/recipes/pollo-brasa.png",
+    nombre: "Pollo a la brasa casero (al horno)",
+    chef: { nombre: "Gastón Acurio", iniciales: "GA", linea: "Inspirado en la versión casera de Gastón Acurio" },
+    prep: 30, coccion: 75, porciones: 5,
+    ingredientes: [
+      { qty: "1 unid", it: "de pollo entero Fresquicarnes", clave: true },
+      { qty: "3 cdas", it: "de sillao" },
+      { qty: "2 cdas", it: "de ají panca licuado", clave: true },
+      { qty: "1 cda", it: "de huacatay (opcional)", clave: true },
+      { qty: "1 cda", it: "de comino" },
+      { qty: "1 cda", it: "de páprika" },
+      { qty: "4 dientes", it: "de ajo molido" },
+      { qty: "1 chorro", it: "de cerveza negra" },
+      { qty: "Al gusto", it: "sal y pimienta" },
+    ],
+    pasos: [
+      "Mezcla todos los aderezos: sillao, ají panca, huacatay, comino, páprika, ajo y cerveza.",
+      "Embárrale al pollo bien adentro y por fuera. Métele en cada rincón. Deja marinar mínimo 4 horas.",
+      "Hornea a 200°C durante 50 minutos, pechuga arriba. A media cocción voltea para que dore parejo.",
+      "Sube a 220°C los últimos 15-20 minutos para que la piel quede crocante y oscura como en la brasa.",
+      "Deja reposar tapado 10 minutos. Trincha y sirve con papas fritas caseras.",
+      "Acompaña con la salsa de la pollería: ají amarillo licuado con mayonesa y un toquecito de huacatay."
+    ],
+    tip: "El secreto del color brasa es el ají panca + sillao. Si la marinada se ve clara, te falta más ají panca.",
+    falta: ["Ají panca", "Huacatay", "Papas blancas para freír"]
+  },
+
+  estofado_pollo: {
+    id: "estofado_pollo",
+    img: "assets/recipes/estofado-pollo.png",
+    nombre: "Estofado de pollo",
+    chef: { nombre: "Nora Sugobono", iniciales: "NS", linea: "Receta basada en la cocina casera de Nora Sugobono" },
+    prep: 15, coccion: 50, porciones: 5,
+    ingredientes: [
+      { qty: "1 kg", it: "de piernas y muslos de pollo con piel Fresquicarnes", clave: true },
+      { qty: "1 unid", it: "de cebolla en cuadros" },
+      { qty: "3 dientes", it: "de ajo molido" },
+      { qty: "2 cdas", it: "de pasta de tomate" },
+      { qty: "1 unid", it: "de zanahoria en cubos" },
+      { qty: "2 unid", it: "de papa amarilla en trozos" },
+      { qty: "1 taza", it: "de arvejas frescas" },
+      { qty: "1 taza", it: "de caldo de pollo" },
+      { qty: "2 hojas", it: "de laurel" },
+      { qty: "1 cda", it: "de orégano seco" },
+      { qty: "Al gusto", it: "sal y pimienta" },
+    ],
+    pasos: [
+      "Sazona el pollo con sal y pimienta. Dóralo en una olla con aceite, piel abajo primero. Saca y reserva.",
+      "En la misma olla, sofríe cebolla y ajo. Suma la pasta de tomate y cocina 2 minutos.",
+      "Echa el caldo, las hojas de laurel y el orégano. Devuelve el pollo a la olla.",
+      "Tapa y cocina a fuego bajo 25 minutos. Suma la zanahoria y la papa, sigue 15 minutos más.",
+      "Agrega las arvejas en los últimos 5 minutos para que queden verdes y enteras.",
+      "Sirve con arroz blanco. La salsa debe quedar espesita, no caldosa."
+    ],
+    tip: "Si quieres un toque dulzón clásico de mamá, échale 2 pasas y un chorrito de vino tinto al sofrito.",
+    falta: ["Pasta de tomate", "Papa amarilla", "Laurel fresco"]
+  },
+
+  higado_encebollado: {
+    id: "higado_encebollado",
+    img: "assets/recipes/higado-encebollado.png",
+    imgPos: "75% 50%",
+    nombre: "Hígado encebollado",
+    chef: { nombre: "Cucho La Rosa", iniciales: "CL", linea: "Inspirado en la cocina criolla de Cucho La Rosa" },
+    prep: 10, coccion: 15, porciones: 4,
+    ingredientes: [
+      { qty: "500 g", it: "de hígado de pollo Fresquicarnes en filetes finos", clave: true },
+      { qty: "2 unid", it: "de cebolla roja en pluma" },
+      { qty: "3 dientes", it: "de ajo picado" },
+      { qty: "1 unid", it: "de ají amarillo en tiras" },
+      { qty: "2 cdas", it: "de sillao" },
+      { qty: "1 chorro", it: "de vinagre tinto" },
+      { qty: "1 cda", it: "de páprika" },
+      { qty: "1 atado", it: "de culantro picado" },
+      { qty: "Al gusto", it: "sal y pimienta" },
+    ],
+    pasos: [
+      "Remoja el hígado en leche por 20 minutos. Esto le quita el sabor fuerte. Sécalo bien antes de cocinar.",
+      "Sazona con sal, pimienta y páprika. Calienta una sartén con aceite hasta que humee.",
+      "Sella los filetes 1 minuto por cada lado, no más. Si lo cocinas mucho se vuelve gomoso.",
+      "Saca el hígado, reserva tapado. En la misma sartén echa cebolla, ajo y ají amarillo. Saltea 3 minutos.",
+      "Devuelve el hígado, suma sillao y vinagre. Mezcla 30 segundos, no más.",
+      "Apaga, espolvorea culantro y sirve con arroz blanco y papas doradas."
+    ],
+    tip: "El hígado bien hecho queda rosado por dentro. Si lo cortas y ves marrón parejo, ya te pasaste de cocción.",
+    falta: ["Leche fresca", "Ají amarillo", "Culantro"]
+  },
+
+  anticuchos: {
+    id: "anticuchos",
+    img: "assets/recipes/anticuchos.png",
+    nombre: "Anticuchos de corazón de pollo",
+    chef: { nombre: "Gastón Acurio", iniciales: "GA", linea: "Receta basada en la propuesta de Gastón Acurio" },
+    prep: 15, coccion: 8, porciones: 4,
+    ingredientes: [
+      { qty: "700 g", it: "de corazón de pollo Fresquicarnes limpio", clave: true },
+      { qty: "4 cdas", it: "de ají panca licuado", clave: true },
+      { qty: "1 cda", it: "de ají mirasol licuado" },
+      { qty: "5 dientes", it: "de ajo molido" },
+      { qty: "2 cdas", it: "de vinagre tinto" },
+      { qty: "1 cdta", it: "de comino" },
+      { qty: "1 cdta", it: "de orégano" },
+      { qty: "1 chorro", it: "de cerveza negra" },
+      { qty: "Al gusto", it: "sal y pimienta" },
+      { qty: "Para acompañar", it: "papa sancochada y choclo" },
+    ],
+    pasos: [
+      "Mezcla ají panca, mirasol, ajo, vinagre, comino, orégano, cerveza, sal y pimienta. Esa es tu marinada.",
+      "Lava bien los corazones de pollo y, si quieres, pártelos por la mitad para que tomen más sabor.",
+      "Echa los corazones en la marinada y deja reposar tapado en refri mínimo 4 horas. Mejor de un día para otro.",
+      "Ensarta los corazones en palitos de anticucho. No los amontones — déjales espacio para que doren parejo.",
+      "Calienta la parrilla o plancha bien fuerte. Echa los anticuchos y cocina 1 a 2 minutos por cada lado.",
+      "Báñalos con la marinada sobrante mientras se cocinan. Eso les da brillo y sabor.",
+      "Sirve sobre rodajas de papa sancochada y choclo, con ají de huacatay."
+    ],
+    tip: "El corazón de pollo se cocina rápido — máximo 2 minutos por lado. Si te pasas, queda gomoso. Mejor pecar de poco que de mucho.",
+    falta: ["Ají panca", "Ají mirasol", "Choclo desgranado"]
+  },
+
+  mollejitas_al_sillao: {
+    id: "mollejitas_al_sillao",
+    img: "assets/recipes/mollejitas-al-sillao.png",
+    nombre: "Mollejitas al sillao",
+    chef: { nombre: "Cucho La Rosa", iniciales: "CL", linea: "Inspirado en la cocina chifa-criolla de Cucho La Rosa" },
+    prep: 10, coccion: 20, porciones: 4,
+    ingredientes: [
+      { qty: "500 g", it: "de mollejas de pollo Fresquicarnes limpias", clave: true },
+      { qty: "1 unid", it: "de cebolla china (parte blanca y verde)" },
+      { qty: "3 dientes", it: "de ajo picado" },
+      { qty: "1 trozo", it: "de kion (jengibre) rallado" },
+      { qty: "3 cdas", it: "de sillao", clave: true },
+      { qty: "1 cda", it: "de aceite de ajonjolí" },
+      { qty: "1 cdta", it: "de azúcar rubia" },
+      { qty: "1 chorro", it: "de vinagre de manzana" },
+      { qty: "Al gusto", it: "sal y pimienta" },
+    ],
+    pasos: [
+      "Limpia bien las mollejas, quita la grasa amarilla. Sancóchalas 15 minutos en agua con sal y un trozo de kion.",
+      "Escurre y reserva. Calienta una sartén grande con aceite y echa el ajo y kion rallado.",
+      "Cuando huela, suma las mollejas escurridas. Saltea 3 minutos a fuego fuerte.",
+      "Echa el sillao, el azúcar, el vinagre y el aceite de ajonjolí. Mezcla bien.",
+      "Suma la cebolla china picada en los últimos 30 segundos para que quede verde.",
+      "Sirve con arroz blanco y un chorrito extra de aceite de ajonjolí encima."
+    ],
+    tip: "Si tu sillao es muy salado, no le pongas más sal. Prueba al final y recién ajusta.",
+    falta: ["Cebolla china", "Kion fresco", "Aceite de ajonjolí"]
+  },
+
+  sancochado_limenio: {
+    id: "sancochado_limenio",
+    img: "assets/recipes/sancochado-limenio.png",
+    nombre: "Sancochado limeño con osobuco",
+    chef: { nombre: "Nora Sugobono", iniciales: "NS", linea: "Inspirado en la cocina casera de Nora Sugobono" },
+    prep: 20, coccion: 130, porciones: 6,
+    ingredientes: [
+      { qty: "1.5 kg", it: "de osobuco de res Fresquicarnes en rodajas gruesas", clave: true },
+      { qty: "1 unid", it: "de cebolla blanca grande en cuartos" },
+      { qty: "6 dientes", it: "de ajo enteros" },
+      { qty: "3 unid", it: "de zanahoria en trozos grandes" },
+      { qty: "4 unid", it: "de papa amarilla pelada" },
+      { qty: "1 trozo", it: "de yuca pelada" },
+      { qty: "1 unid", it: "de camote amarillo" },
+      { qty: "3 unid", it: "de choclo en mitades" },
+      { qty: "½ taza", it: "de garbanzos remojados desde el día anterior" },
+      { qty: "¼ unid", it: "de repollo en gajos" },
+      { qty: "1 atado", it: "de hierbabuena fresca" },
+      { qty: "Al gusto", it: "sal, pimienta, comino" },
+    ],
+    pasos: [
+      "En una olla grande, pon el osobuco con agua que lo cubra bien, sal, pimienta y comino.",
+      "Echa la cebolla, ajos enteros y los garbanzos. Hierve a fuego medio.",
+      "Cuando hierva, baja a fuego lento y espuma con un cucharón. Tapa y cocina 1 hora y 30 minutos.",
+      "Agrega la zanahoria, yuca y camote. Cocina 20 minutos más.",
+      "Suma papa amarilla, choclo y repollo en los últimos 15 minutos para que no se deshagan.",
+      "Termina con la hierbabuena al apagar. Sirve la carne con un poco de cada verdura y un cuencón de caldo aparte."
+    ],
+    tip: "El tuétano del osobuco es oro — regálalo con sal gruesa sobre pan tostado mientras esperan el plato principal.",
+    falta: ["Papa amarilla", "Yuca fresca", "Choclo peruano"]
+  },
+
+  caldo_pescuezo: {
+    id: "caldo_pescuezo",
+    img: "assets/recipes/caldo-pescuezo.png",
+    nombre: "Caldo de pescuezo",
+    chef: { nombre: "Cucho La Rosa", iniciales: "CL", linea: "Inspirado en la cocina criolla de Cucho La Rosa" },
+    prep: 10, coccion: 90, porciones: 4,
+    ingredientes: [
+      { qty: "1 kg", it: "de pescuezo de res Fresquicarnes en trozos", clave: true },
+      { qty: "1 unid", it: "de cebolla blanca grande" },
+      { qty: "4 dientes", it: "de ajo" },
+      { qty: "2 unid", it: "de zanahoria en rodajas" },
+      { qty: "3 unid", it: "de papa blanca medianas" },
+      { qty: "½ taza", it: "de fideo cabello de ángel" },
+      { qty: "1 atado", it: "de hierbabuena" },
+      { qty: "1 atado", it: "de culantro" },
+      { qty: "1 cda", it: "de comino" },
+      { qty: "Al gusto", it: "sal y pimienta" },
+    ],
+    pasos: [
+      "Lava bien los trozos de pescuezo. En una olla grande, cúbrelos con agua fría.",
+      "Cuando hierva, espuma todo lo que sube a la superficie — esa es la clave del caldo limpio.",
+      "Agrega cebolla entera, ajos, sal, pimienta y comino. Tapa y cocina 1 hora a fuego bajo.",
+      "Añade zanahoria y papa. Cocina 20 minutos más, hasta que la papa esté suave.",
+      "Echa el fideo cabello de ángel los últimos 5 minutos.",
+      "Sirve con un puntito de hierbabuena, culantro picado y un poco de ají al lado."
+    ],
+    tip: "El pescuezo tiene poca carne pero mucho hueso — y de ahí sale el sabor real. Cocción larga y lenta, siempre.",
+    falta: ["Papa blanca", "Zanahoria fresca", "Hierbabuena"]
+  },
+
+  pastel_papa: {
+    id: "pastel_papa",
+    img: "assets/recipes/pastel-papa.png",
+    nombre: "Pastel de papa con carne molida",
+    chef: { nombre: "Sandra Plevisani", iniciales: "SP", linea: "Inspirado en la cocina hogareña de Sandra Plevisani" },
+    prep: 25, coccion: 45, porciones: 6,
+    ingredientes: [
+      { qty: "600 g", it: "de carne molida de res Fresquicarnes", clave: true },
+      { qty: "1.5 kg", it: "de papa amarilla sancochada" },
+      { qty: "1 unid", it: "de cebolla picada finita" },
+      { qty: "3 dientes", it: "de ajo molido" },
+      { qty: "2 cdas", it: "de ají panca molido" },
+      { qty: "¼ taza", it: "de pasas" },
+      { qty: "½ taza", it: "de aceitunas botija sin pepa, picadas" },
+      { qty: "2 unid", it: "de huevo duro picado" },
+      { qty: "3 cdas", it: "de mantequilla" },
+      { qty: "½ taza", it: "de leche caliente" },
+      { qty: "½ taza", it: "de queso parmesano rallado" },
+      { qty: "Al gusto", it: "sal, pimienta, comino" },
+    ],
+    pasos: [
+      "Sofríe cebolla y ajo en aceite hasta transparentar. Añade el ají panca y cocina 2 minutos.",
+      "Echa la carne molida y deshazla con cuchara. Cocina 8 minutos hasta que pierda el color rosado.",
+      "Suma sal, pimienta, comino, pasas, aceitunas y huevo duro. Mezcla y apaga. Reserva.",
+      "Maja las papas amarillas tibias con mantequilla y la leche caliente. Sazona con sal.",
+      "En una fuente engrasada, pon una capa de puré, luego toda la carne molida, y otra capa de puré encima.",
+      "Espolvorea el queso parmesano y hornea 25 minutos a 200 °C hasta que dore por arriba."
+    ],
+    tip: "La papa amarilla recien majada con mantequilla derritiendo encima es el secreto. No uses papa fría — queda gomosa.",
+    falta: ["Papa amarilla", "Queso parmesano", "Aceitunas botija"]
+  },
+
+  /* ---- RECETAS INNOVACIÓN ---- */
+
+  tataki_lomo: {
+    id: "tataki_lomo", innovacion: true,
+    img: "assets/recipes/tataki-lomo.png",
+    nombre: "Tataki de lomo fino con leche de tigre",
+    chef: { nombre: "Mitsuharu Tsumura", iniciales: "MT", linea: "Fusión nikkei — inspirado en Maido" },
+    prep: 20, coccion: 5, porciones: 4,
+    ingredientes: [
+      { qty: "500 g", it: "de lomo fino Fresquicarnes (bloque)", clave: true },
+      { qty: "3 cdas", it: "de sillao" },
+      { qty: "1 cda", it: "de aceite de ajonjolí" },
+      { qty: "1 taza", it: "de leche de tigre clásica (limón, ají, kion, culantro)", clave: true },
+      { qty: "1 unid", it: "de ají limo en rodajas finas" },
+      { qty: "Cebolla china picada", it: "para decorar" },
+      { qty: "Ajonjolí tostado", it: "para decorar" },
+    ],
+    pasos: [
+      "Marina el bloque de lomo en sillao y aceite de ajonjolí por 15 minutos.",
+      "Sella en sartén MUY caliente con aceite neutro: 30 segundos por cada lado. El interior debe quedar crudo.",
+      "Lleva al freezer 10 minutos para que endurezca ligeramente y puedas cortar bien.",
+      "Corta en rodajas de 5 mm con un cuchillo bien afilado.",
+      "Sirve las rodajas en plato frío, baña con leche de tigre fría.",
+      "Decora con rodajas de ají limo, cebolla china y ajonjolí tostado. Sirve de inmediato."
+    ],
+    tip: "La leche de tigre debe estar fría y el lomo sellado al último momento. Temperatura es todo en este plato.",
+    falta: ["Ají limo fresco", "Kion fresco", "Culantro"]
+  },
+
+  bife_miso: {
+    id: "bife_miso", innovacion: true,
+    img: "assets/recipes/bife-miso.png",
+    nombre: "Bife de chorizo al miso negro con mantequilla de ají amarillo",
+    chef: { nombre: "Mitsuharu Tsumura", iniciales: "MT", linea: "Fusión nikkei — inspirado en Maido" },
+    prep: 15, coccion: 12, porciones: 2,
+    ingredientes: [
+      { qty: "2 bifes", it: "de chorizo de res Fresquicarnes (300 g c/u)", clave: true },
+      { qty: "3 cdas", it: "de pasta miso negro", clave: true },
+      { qty: "2 cdas", it: "de mirin" },
+      { qty: "1 cda", it: "de sake" },
+      { qty: "100 g", it: "de mantequilla sin sal" },
+      { qty: "2 cdas", it: "de pasta de ají amarillo" },
+      { qty: "Sal gruesa", it: "al gusto" },
+    ],
+    pasos: [
+      "Mezcla el miso negro, mirin y sake. Unta los bifes y deja marinar 30 minutos mínimo (ideal: 2 horas).",
+      "Prepara la mantequilla de ají: bate la mantequilla a temperatura ambiente con la pasta de ají hasta integrar. Refrigera.",
+      "Retira el exceso de marinada de la carne antes de cocinar — el miso se quema rápido.",
+      "Sella los bifes en sartén bien caliente, 3-4 min por lado para término medio.",
+      "Deja reposar 3 minutos tapado con papel aluminio.",
+      "Sirve con una nuez de mantequilla de ají encima — se derrite sobre la carne caliente."
+    ],
+    tip: "Seca bien la superficie del bife antes de sellar. La humedad del marinado genera vapor y no deja dorar.",
+    falta: ["Pasta miso negro", "Mirin y sake", "Ají amarillo"]
+  },
+
+  costillas_tamarindo: {
+    id: "costillas_tamarindo", innovacion: true,
+    img: "assets/recipes/costillas-tamarindo.png",
+    nombre: "Costillas de res en salsa de tamarindo y chicha morada",
+    chef: { nombre: "Virgilio Martínez", iniciales: "VM", linea: "Cocina peruana contemporánea — inspirado en Central" },
+    prep: 20, coccion: 180, porciones: 6,
+    ingredientes: [
+      { qty: "1.5 kg", it: "de costillas de res Fresquicarnes", clave: true },
+      { qty: "200 g", it: "de pasta de tamarindo", clave: true },
+      { qty: "500 ml", it: "de chicha morada (sin colar)", clave: true },
+      { qty: "4 cdas", it: "de miel de caña" },
+      { qty: "2 cdas", it: "de sillao" },
+      { qty: "1 cda", it: "de ají panca en pasta" },
+      { qty: "4 dientes", it: "de ajo" },
+      { qty: "Sal y pimienta", it: "al gusto" },
+    ],
+    pasos: [
+      "Mezcla tamarindo, chicha morada, miel, sillao, ají panca y ajo para el marinado.",
+      "Marina las costillas en la mezcla al menos 4 horas (ideal: toda la noche en refri).",
+      "Coloca las costillas en una fuente para horno, cubre con papel aluminio y hornea a 160 °C por 2.5 horas.",
+      "Retira el aluminio, sube la temperatura a 200 °C y hornea 30 minutos más para que glasee.",
+      "Reduce el líquido sobrante en una sartén hasta que espese y úsalo como salsa.",
+      "Sirve con camote asado y sarza de cebolla con ají amarillo."
+    ],
+    tip: "La chicha morada aporta acidez y color profundo. No uses chicha de sobre — el sabor no es el mismo.",
+    falta: ["Pasta de tamarindo", "Chicha morada fresca", "Ají panca"]
+  },
+
+  tira_cafe: {
+    id: "tira_cafe", innovacion: true,
+    img: "assets/recipes/tira-cafe.png",
+    nombre: "Asado de tira con rubio de café y chimichurri de hierbabuena",
+    chef: { nombre: "Virgilio Martínez", iniciales: "VM", linea: "Cocina peruana contemporánea — inspirado en Central" },
+    prep: 15, coccion: 15, porciones: 4,
+    ingredientes: [
+      { qty: "1.2 kg", it: "de asado de tira Fresquicarnes", clave: true },
+      { qty: "3 cdas", it: "de café molido fino", clave: true },
+      { qty: "2 cdas", it: "de azúcar rubia" },
+      { qty: "1 cda", it: "de pimentón ahumado" },
+      { qty: "1 cda", it: "de sal gruesa" },
+      { qty: "1 atado", it: "de hierbabuena" },
+      { qty: "1/2 taza", it: "de aceite de oliva" },
+      { qty: "2 cdas", it: "de vinagre de manzana" },
+    ],
+    pasos: [
+      "Mezcla café, azúcar, pimentón y sal: es tu rubio (rub) seco.",
+      "Unta generosamente el asado de tira por todas partes. Deja reposar 1 hora a temperatura ambiente.",
+      "Prepara el chimichurri: pica la hierbabuena finamente, mezcla con aceite, vinagre y sal.",
+      "Asa la tira en parrilla bien caliente, 6-7 min por lado para término medio-jugoso.",
+      "Deja reposar 5 minutos: si cortas enseguida, pierdes todos los jugos.",
+      "Sirve en tiras con el chimichurri de hierbabuena al lado."
+    ],
+    tip: "El café crea una costra oscura y aromática que no sabe a café sino que profundiza el sabor de la carne.",
+    falta: ["Café molido fino", "Pimentón ahumado", "Hierbabuena fresca"]
+  },
+
+  osobuco_quinua: {
+    id: "osobuco_quinua", innovacion: true,
+    img: "assets/recipes/osobuco-quinua.png",
+    nombre: "Osobuco braseado andino con risotto de quinua",
+    chef: { nombre: "Virgilio Martínez", iniciales: "VM", linea: "Cocina andina contemporánea — inspirado en Central" },
+    prep: 25, coccion: 150, porciones: 4,
+    ingredientes: [
+      { qty: "4 rodajas", it: "de osobuco de res Fresquicarnes", clave: true },
+      { qty: "2 tazas", it: "de quinua blanca", clave: true },
+      { qty: "1 taza", it: "de vino blanco seco" },
+      { qty: "500 ml", it: "de caldo de res" },
+      { qty: "1 unid", it: "de cebolla amarilla" },
+      { qty: "4 dientes", it: "de ajo" },
+      { qty: "2 ramas", it: "de romero" },
+      { qty: "50 g", it: "de queso parmesano rallado" },
+      { qty: "1 cda", it: "de mantequilla" },
+    ],
+    pasos: [
+      "Sella el osobuco con sal y pimienta en una olla con aceite caliente a fuego alto, 2 min por lado.",
+      "Retira la carne. En la misma olla sofríe cebolla y ajo hasta dorar.",
+      "Devuelve el osobuco, agrega el vino y deja evaporar el alcohol 2 minutos.",
+      "Suma el caldo y el romero. Tapa y brasea a fuego muy bajo 2 horas y 15 minutos.",
+      "Para el risotto: tuesta la quinua en sartén seca 3 min. Cocínala con el líquido del braseo. Cuando esté al dente, incorpora mantequilla y parmesano.",
+      "Sirve la quinua como base y coloca el osobuco encima con su jugo."
+    ],
+    tip: "El tuétano del osobuco se mezcla con el jugo del braseo y vuelve el caldo casi imposible de ignorar. Sácalo con una cucharita y ponlo sobre la quinua.",
+    falta: ["Quinua blanca", "Vino blanco seco", "Parmesano rallado"]
+  },
+
+  pho_criollo: {
+    id: "pho_criollo", innovacion: true,
+    img: "assets/recipes/pho-criollo.png",
+    nombre: "Phở criollo de pescuezo con ají amarillo y cebolla china",
+    chef: { nombre: "Mitsuharu Tsumura", iniciales: "MT", linea: "Fusión peruano-asiática — inspirado en Maido" },
+    prep: 20, coccion: 180, porciones: 6,
+    ingredientes: [
+      { qty: "1.5 kg", it: "de pescuezo de res Fresquicarnes", clave: true },
+      { qty: "200 g", it: "de fideos de arroz anchos" },
+      { qty: "2 cdas", it: "de ají amarillo en pasta", clave: true },
+      { qty: "1 trozo", it: "de kion (jengibre) grande" },
+      { qty: "1 unid", it: "de cebolla blanca, partida a la mitad" },
+      { qty: "3 ramas", it: "de anís estrella" },
+      { qty: "Cebolla china, culantro, ají limo", it: "para servir" },
+      { qty: "Sillao y limón", it: "para condimentar en mesa" },
+    ],
+    pasos: [
+      "Tuesta la cebolla y el kion directamente sobre la llama o en sartén seca hasta chamuscar — eso da color al caldo.",
+      "Hierve el pescuezo en abundante agua con la cebolla, kion, anís y ají amarillo por 3 horas a fuego lento. Espuma constantemente.",
+      "Cuela el caldo. Desmenuza la poca carne que haya en el pescuezo.",
+      "Cocina los fideos de arroz según instrucciones. Colócalos en el fondo del tazón.",
+      "Vierte el caldo caliente sobre los fideos.",
+      "Acompaña con carne desmenuzada, cebolla china, culantro, ají limo, sillao y limón en la mesa."
+    ],
+    tip: "El secreto es el anís estrella junto al ají amarillo — el resultado es un caldo que huele a Asia y sabe a Lima.",
+    falta: ["Fideos de arroz anchos", "Anís estrella", "Ají amarillo", "Kion"]
+  },
+
+  croquetas_molida: {
+    id: "croquetas_molida", innovacion: true,
+    img: "assets/recipes/croquetas-molida.png",
+    nombre: "Croquetas de carne molida con salsa huancaína",
+    chef: { nombre: "Nora Sugobono", iniciales: "NS", linea: "Cocina criolla casera — inspirado en Nora Sugobono" },
+    prep: 30, coccion: 20, porciones: 5,
+    ingredientes: [
+      { qty: "500 g", it: "de carne molida Fresquicarnes", clave: true },
+      { qty: "1 taza", it: "de papa sancochada y prensada" },
+      { qty: "2 huevos", it: "(1 para la mezcla, 1 para empanizar)" },
+      { qty: "1/2 taza", it: "de cebolla picada finamente" },
+      { qty: "2 cdas", it: "de ají amarillo en pasta" },
+      { qty: "Pan rallado", it: "para empanizar" },
+      { qty: "1 taza", it: "de salsa huancaína lista", clave: true },
+      { qty: "Aceite", it: "para freír" },
+    ],
+    pasos: [
+      "Dora la carne molida con cebolla y ají amarillo. Salpimenta. Deja enfriar.",
+      "Mezcla la carne fría con la papa prensada y 1 huevo. Forma croquetas cilíndricas.",
+      "Pasa por huevo batido y pan rallado. Repite para doble empanizado.",
+      "Refrigera las croquetas 20 minutos antes de freír — no se desarman.",
+      "Fríe en aceite abundante a 175 °C hasta dorar parejo, unos 4 minutos.",
+      "Sirve sobre un espejo de salsa huancaína con lechuga crocante al costado."
+    ],
+    tip: "La papa en la mezcla actúa como aglutinante y cremosidad. Sin ella, las croquetas se abren al freír.",
+    falta: ["Papa amarilla", "Ají amarillo", "Queso fresco para la huancaína"]
+  },
+
+  pierna_lacada: {
+    id: "pierna_lacada", innovacion: true,
+    img: "assets/recipes/pierna-lacada.png",
+    nombre: "Pierna de cerdo lacada en miel, ají mirasol y sillao",
+    chef: { nombre: "Gastón Acurio", iniciales: "GA", linea: "Cocina peruana festiva — inspirado en Gastón Acurio" },
+    prep: 30, coccion: 240, porciones: 10,
+    ingredientes: [
+      { qty: "3 kg", it: "de pierna de cerdo Fresquicarnes", clave: true },
+      { qty: "4 cdas", it: "de miel de caña o miel de abeja" },
+      { qty: "2 cdas", it: "de pasta de ají mirasol", clave: true },
+      { qty: "3 cdas", it: "de sillao" },
+      { qty: "1 cabeza", it: "de ajo" },
+      { qty: "2 cdas", it: "de vinagre de manzana" },
+      { qty: "Sal, pimienta, comino", it: "al gusto" },
+    ],
+    pasos: [
+      "Hazle incisiones profundas a la pierna con un cuchillo e introduce dientes de ajo enteros.",
+      "Mezcla miel, ají mirasol, sillao y vinagre. Marina la pierna con todo esto al menos 6 horas.",
+      "Hornea cubierta a 160 °C por 3.5 horas, bañando cada hora con los jugos de la fuente.",
+      "Sube a 200 °C los últimos 30 minutos sin tapar para lacuar la piel.",
+      "Deja reposar 15 minutos antes de cortar para que los jugos se redistribuyan.",
+      "Sirve con tamalitos, salsa de ají y ensalada de col criolla."
+    ],
+    tip: "El ají mirasol da un dulzor afrutado diferente al panca. No los confundas — cambia completamente el resultado.",
+    falta: ["Ají mirasol seco o en pasta", "Miel de caña"]
+  },
+
+  chuleta_quinua: {
+    id: "chuleta_quinua", innovacion: true,
+    img: "assets/recipes/chuleta-quinua.png",
+    nombre: "Chuleta de cerdo en costra de quinua con salsa de maracuyá",
+    chef: { nombre: "Pedro Miguel Schiaffino", iniciales: "PS", linea: "Cocina amazónica — inspirado en Amaz" },
+    prep: 20, coccion: 15, porciones: 4,
+    ingredientes: [
+      { qty: "4 chuletas", it: "de cerdo Fresquicarnes (2 cm grosor)", clave: true },
+      { qty: "1 taza", it: "de quinua inflada o cocida y seca", clave: true },
+      { qty: "2 huevos batidos", it: "para empanizar" },
+      { qty: "1/2 taza", it: "de harina" },
+      { qty: "200 ml", it: "de jugo de maracuyá" },
+      { qty: "3 cdas", it: "de miel" },
+      { qty: "1 cda", it: "de mantequilla" },
+      { qty: "Sal, pimienta", it: "al gusto" },
+    ],
+    pasos: [
+      "Salpimienta las chuletas. Pásalas por harina, luego huevo batido, luego quinua presionando bien.",
+      "Fríe en aceite a 170 °C por 4 minutos por lado, hasta que la quinua esté dorada y crocante.",
+      "Para la salsa: reduce el jugo de maracuyá con miel a fuego medio 8 minutos. Termina con mantequilla fuera del fuego.",
+      "Sirve la chuleta sobre la salsa de maracuyá.",
+      "Acompaña con puré de papa amarilla o arroz blanco."
+    ],
+    tip: "La quinua inflada da más textura que la cocida. Si la cocinas para empanizar, extiéndela en bandeja y ponla al horno 10 min a 180 °C para secarla.",
+    falta: ["Quinua blanca", "Maracuyá fresco"]
+  },
+
+  panceta_cerveza: {
+    id: "panceta_cerveza", innovacion: true,
+    img: "assets/recipes/panceta-cerveza.png",
+    nombre: "Panceta confitada en cerveza negra con puré de camote",
+    chef: { nombre: "Gastón Acurio", iniciales: "GA", linea: "Cocina de taberna peruana — inspirado en Gastón Acurio" },
+    prep: 20, coccion: 180, porciones: 6,
+    ingredientes: [
+      { qty: "1.2 kg", it: "de panceta de cerdo Fresquicarnes con piel", clave: true },
+      { qty: "1 botella", it: "de cerveza negra (330 ml)", clave: true },
+      { qty: "3 cdas", it: "de miel de caña" },
+      { qty: "2 cdas", it: "de sillao" },
+      { qty: "1 cda", it: "de pasta de ají panca" },
+      { qty: "4 dientes", it: "de ajo" },
+      { qty: "2 camotes medianos", it: "sancochados y pelados" },
+      { qty: "Mantequilla y sal", it: "para el puré" },
+    ],
+    pasos: [
+      "Marina la panceta en cerveza, miel, sillao, ají panca y ajo por 4 horas.",
+      "Coloca en fuente con la marinada, cubre con aluminio y hornea a 150 °C por 2.5 horas.",
+      "Sube a 220 °C los últimos 20 minutos sin tapar para que la piel truene.",
+      "Mientras tanto, prepara el puré: tritura el camote sancochado con mantequilla y sal.",
+      "Reduce los jugos de la fuente en una sartén hasta obtener una salsa espesa.",
+      "Sirve la panceta en láminas sobre el puré de camote con la salsa encima."
+    ],
+    tip: "El puré de camote debe ir caliente al momento de emplatar — fría, la grasa de la panceta no se integra bien.",
+    falta: ["Cerveza negra", "Ají panca", "Camote"]
+  },
+
+  lomo_cerdo_lucuma: {
+    id: "lomo_cerdo_lucuma", innovacion: true,
+    img: "assets/recipes/lomo-cerdo-lucuma.png",
+    nombre: "Medallones de lomo de cerdo con salsa de lúcuma y romero",
+    chef: { nombre: "Pedro Miguel Schiaffino", iniciales: "PS", linea: "Cocina amazónica peruana — inspirado en Amaz" },
+    prep: 15, coccion: 20, porciones: 4,
+    ingredientes: [
+      { qty: "600 g", it: "de lomo de cerdo Fresquicarnes en medallones", clave: true },
+      { qty: "2 lúcumas maduras", it: "peladas y sin pepa", clave: true },
+      { qty: "150 ml", it: "de crema de leche" },
+      { qty: "1 cda", it: "de mantequilla" },
+      { qty: "2 ramas", it: "de romero fresco" },
+      { qty: "1/2 taza", it: "de caldo de pollo" },
+      { qty: "Sal y pimienta", it: "al gusto" },
+    ],
+    pasos: [
+      "Salpimienta los medallones. Sella en sartén caliente con aceite, 2-3 min por lado.",
+      "Retira la carne, reserva. En la misma sartén, sofríe el romero en mantequilla 1 minuto.",
+      "Agrega el caldo y raspa el fondo para incorporar los jugos del sellado.",
+      "Licúa la lúcuma con la crema de leche hasta obtener una crema suave. Vierte en la sartén.",
+      "Cocina a fuego bajo 5 minutos, moviendo hasta que espese. Ajusta sal.",
+      "Devuelve los medallones 2 minutos a la salsa. Sirve con arroz con leche de coco o papa sancochada."
+    ],
+    tip: "La lúcuma debe estar muy madura (oscura por dentro) para que su dulzor natural equilibre la salsa sin necesitar azúcar.",
+    falta: ["Lúcuma madura", "Romero fresco", "Crema de leche"]
+  },
+
+  pechuga_coco: {
+    id: "pechuga_coco", innovacion: true,
+    img: "assets/recipes/pechuga-coco.png",
+    nombre: "Pechuga de pollo en leche de coco y masala criollo",
+    chef: { nombre: "Pedro Miguel Schiaffino", iniciales: "PS", linea: "Cocina amazónica — inspirado en Amaz" },
+    prep: 15, coccion: 25, porciones: 4,
+    ingredientes: [
+      { qty: "4 pechugas", it: "de pollo Fresquicarnes", clave: true },
+      { qty: "400 ml", it: "de leche de coco", clave: true },
+      { qty: "2 cdas", it: "de pasta de ají amarillo" },
+      { qty: "1 cda", it: "de curry en polvo" },
+      { qty: "1 unid", it: "de cebolla picada" },
+      { qty: "3 dientes", it: "de ajo" },
+      { qty: "1 cda", it: "de kion rallado" },
+      { qty: "Culantro y arroz blanco", it: "para acompañar" },
+    ],
+    pasos: [
+      "Sofríe cebolla, ajo y kion en aceite. Agrega el curry y el ají amarillo. Cocina 2 minutos.",
+      "Añade la leche de coco, mezcla bien y lleva a hervor suave.",
+      "Sella las pechugas aparte en sartén caliente, 2 min por lado.",
+      "Suma las pechugas a la salsa, tapa y cocina a fuego bajo 15-18 minutos.",
+      "La pechuga está lista cuando no hay rosado al cortarla — no la pases.",
+      "Sirve en tajadas sobre la salsa, con arroz blanco y culantro fresco."
+    ],
+    tip: "El curry + ají amarillo es la combinación que da el perfil 'masala criollo'. Usa curry madras si encuentras — más aromático que el genérico.",
+    falta: ["Leche de coco", "Curry en polvo (idealmente madras)", "Kion"]
+  },
+
+  muslos_birria: {
+    id: "muslos_birria", innovacion: true,
+    img: "assets/recipes/muslos-birria.png",
+    nombre: "Birria de pollo estilo Lima con consomé de ají panca",
+    chef: { nombre: "Gastón Acurio", iniciales: "GA", linea: "Fusión peruano-mexicana — inspirado en Gastón Acurio" },
+    prep: 25, coccion: 120, porciones: 6,
+    ingredientes: [
+      { qty: "1.5 kg", it: "de piernas y muslos de pollo Fresquicarnes", clave: true },
+      { qty: "4 cdas", it: "de pasta de ají panca", clave: true },
+      { qty: "2 cdas", it: "de ají mirasol en pasta" },
+      { qty: "1 unid", it: "de cebolla blanca" },
+      { qty: "5 dientes", it: "de ajo" },
+      { qty: "3 ramas", it: "de orégano seco" },
+      { qty: "1 litro", it: "de caldo de pollo" },
+      { qty: "Tortillas de maíz y cebolla china", it: "para servir" },
+    ],
+    pasos: [
+      "Licúa los ajíes con ajo, cebolla, orégano y sal. Marina el pollo al menos 2 horas.",
+      "Sella el pollo en olla caliente hasta dorar. Agrega el caldo.",
+      "Tapa y cocina a fuego bajo 1 hora 45 minutos. El pollo debe estar muy suave.",
+      "Retira el pollo, desmenuza y reserva. El líquido es el consomé — ajusta sal.",
+      "En sartén caliente, arma taquitos: tortilla de maíz bañada en consomé, dorada a la plancha, rellena con pollo desmenuzado.",
+      "Sirve con el consomé aparte para mojar. Decora con cebolla china y limón."
+    ],
+    tip: "La clave de la birria peruana es el ají panca como base — da el color rojo profundo y el sabor dulzón que la diferencia de la versión mexicana.",
+    falta: ["Ají panca", "Ají mirasol", "Tortillas de maíz"]
+  },
+
+  pollo_sal_huacatay: {
+    id: "pollo_sal_huacatay", innovacion: true,
+    img: "assets/recipes/pollo-sal-huacatay.png",
+    nombre: "Pollo entero en costra de sal rosada y huacatay",
+    chef: { nombre: "Virgilio Martínez", iniciales: "VM", linea: "Cocina andina — inspirado en Central" },
+    prep: 20, coccion: 90, porciones: 5,
+    ingredientes: [
+      { qty: "1 pollo entero", it: "de 1.8 kg aprox — Fresquicarnes", clave: true },
+      { qty: "1 kg", it: "de sal gruesa rosada", clave: true },
+      { qty: "2 claras de huevo", it: "(para hacer la costra)" },
+      { qty: "1 atado", it: "de huacatay fresco", clave: true },
+      { qty: "1 limón", it: "partido por la mitad" },
+      { qty: "4 dientes", it: "de ajo machacado" },
+      { qty: "Aceite de oliva", it: "para el huacatay" },
+    ],
+    pasos: [
+      "Mezcla la sal gruesa con las claras de huevo y el huacatay picado fino hasta que tenga textura de arena húmeda.",
+      "Rellena el interior del pollo con limón y ajo. Coloca en fuente para horno.",
+      "Cubre el pollo completamente con la costra de sal. Que no quede ningún espacio sin cubrir.",
+      "Hornea a 200 °C por 90 minutos. La costra se volverá una capa dura.",
+      "Rompe la costra en la mesa — el efecto es espectacular. La piel quedará dorada debajo.",
+      "Sirve con ensalada fresca y crema de huacatay al costado."
+    ],
+    tip: "La costra de sal no hace el pollo salado — actúa como horno sellado que retiene todos los jugos y el aroma del huacatay.",
+    falta: ["Sal gruesa rosada", "Huacatay fresco"]
+  },
+
+  pate_higado: {
+    id: "pate_higado", innovacion: true,
+    img: "assets/recipes/pate-higado.png",
+    nombre: "Paté de hígado de pollo con cebolla caramelizada al pisco",
+    chef: { nombre: "Gastón Acurio", iniciales: "GA", linea: "Cocina peruana de autor — inspirado en Gastón Acurio" },
+    prep: 20, coccion: 25, porciones: 8,
+    ingredientes: [
+      { qty: "400 g", it: "de hígado de pollo Fresquicarnes", clave: true },
+      { qty: "2 cebollas blancas", it: "en juliana fina" },
+      { qty: "50 ml", it: "de pisco puro" },
+      { qty: "100 g", it: "de mantequilla sin sal" },
+      { qty: "100 ml", it: "de crema de leche" },
+      { qty: "2 dientes", it: "de ajo" },
+      { qty: "1 cda", it: "de tomillo seco" },
+      { qty: "Sal y pimienta negra", it: "al gusto" },
+    ],
+    pasos: [
+      "Carameliza las cebollas en mantequilla a fuego muy bajo, 20 minutos, hasta que queden doradas y dulces.",
+      "Sube el fuego, agrega el pisco y flambea con cuidado. Deja evaporar.",
+      "En otra sartén, saltea los hígados con ajo y tomillo, 1 minuto por lado. Deben quedar rosados por dentro.",
+      "Licúa los hígados con la mitad de la cebolla caramelizada, la crema y la mantequilla restante.",
+      "Procesa hasta obtener una crema lisa. Rectifica sal y pimienta.",
+      "Vierte en un recipiente, cubre con la cebolla restante. Refrigera 2 horas antes de servir con pan tostado."
+    ],
+    tip: "Los hígados rosados por dentro son clave — sobrecocidos dan un paté granuloso y amargo. El pisco flambado añade complejidad sin sabor alcohólico.",
+    falta: ["Pisco puro", "Crema de leche", "Pan de campo para servir"]
+  },
+
+  anticuchos_chocolate: {
+    id: "anticuchos_chocolate", innovacion: true,
+    img: "assets/recipes/anticuchos-chocolate.png",
+    nombre: "Anticuchos de corazón glaseados en chocolate 70% y ají panca",
+    chef: { nombre: "Virgilio Martínez", iniciales: "VM", linea: "Cocina peruana de autor — inspirado en Central" },
+    prep: 30, coccion: 15, porciones: 6,
+    ingredientes: [
+      { qty: "1 kg", it: "de corazón de pollo Fresquicarnes", clave: true },
+      { qty: "3 cdas", it: "de pasta de ají panca", clave: true },
+      { qty: "80 g", it: "de chocolate amargo 70% cacao", clave: true },
+      { qty: "2 cdas", it: "de sillao" },
+      { qty: "3 dientes", it: "de ajo" },
+      { qty: "1 cda", it: "de vinagre tinto" },
+      { qty: "Sal, comino y pimienta", it: "al gusto" },
+    ],
+    pasos: [
+      "Marina los corazones al menos 4 horas: ají panca, ajo, sillao, comino, sal y vinagre.",
+      "Derrite el chocolate a baño maría con 2 cdas del marinado sobrante.",
+      "Ensarta los corazones en palitos de anticucho.",
+      "Asa a la parrilla o plancha a fuego alto: 2-3 min por lado. El corazón debe estar cocido pero no duro.",
+      "En los últimos 30 segundos, baña con el glaseado de chocolate. Deja que se caramelice.",
+      "Sirve con papa sancochada y salsa de ají amarillo al lado."
+    ],
+    tip: "El chocolate oscuro amplifica el sabor ahumado del ají panca sin endulzar. El equilibrio amargo-picante-ahumado es lo que hace a este plato inolvidable.",
+    falta: ["Chocolate amargo 70%", "Ají panca", "Palitos de anticucho"]
+  },
+
+  mollejas_crocantes: {
+    id: "mollejas_crocantes", innovacion: true,
+    img: "assets/recipes/mollejas-crocantes.png",
+    nombre: "Mollejas doble crocante con alioli de huacatay",
+    chef: { nombre: "Cucho La Rosa", iniciales: "CL", linea: "Cocina criolla contemporánea — inspirado en Cucho La Rosa" },
+    prep: 20, coccion: 30, porciones: 4,
+    ingredientes: [
+      { qty: "600 g", it: "de mollejas de pollo Fresquicarnes", clave: true },
+      { qty: "1 taza", it: "de harina de trigo" },
+      { qty: "1 taza", it: "de maicena" },
+      { qty: "2 huevos batidos", it: "para empanizar" },
+      { qty: "Sal, pimienta y ajo en polvo", it: "al gusto" },
+      { qty: "3 dientes", it: "de ajo" },
+      { qty: "1/2 taza", it: "de aceite de oliva" },
+      { qty: "1 atado", it: "de huacatay fresco", clave: true },
+      { qty: "1 huevo", it: "para el alioli" },
+    ],
+    pasos: [
+      "Sancocha las mollejas 15 minutos con sal y kion. Escurre y seca bien con papel absorbente.",
+      "Empaniza: harina sazonada → huevo → mezcla harina+maicena. Presiona bien.",
+      "Fríe en aceite a 180 °C por 5-6 minutos hasta que estén bien doradas y crocantes.",
+      "Para el alioli: licúa el huevo, ajo, sal y jugo de limón. Sin parar el mixer, agrega el aceite en hilo fino hasta emulsionar.",
+      "Incorpora el huacatay picado muy fino al alioli. Refrigera.",
+      "Sirve las mollejas recién salidas del aceite con el alioli de huacatay al costado."
+    ],
+    tip: "La maicena en el rebozado es el truco del doble crocante — sola, la harina no da esa textura. La proporción 1:1 es clave.",
+    falta: ["Maicena", "Huacatay fresco"]
+  },
+
+  /* ---- FIN RECETAS INNOVACIÓN ---- */
+
+  lomito_romero: {
+    id: "lomito_romero",
+    img: "assets/recipes/lomito-romero.png",
+    nombre: "Bife de lomo de cerdo al romero",
+    chef: { nombre: "Gastón Acurio", iniciales: "GA", linea: "Inspirado en la cocina de Gastón Acurio" },
+    prep: 10, coccion: 25, porciones: 4,
+    ingredientes: [
+      { qty: "800 g", it: "de bife de lomo de cerdo Fresquicarnes en medallones", clave: true },
+      { qty: "4 dientes", it: "de ajo machacados" },
+      { qty: "2 ramitas", it: "de romero fresco", clave: true },
+      { qty: "2 cdas", it: "de mostaza" },
+      { qty: "2 cdas", it: "de miel de abeja" },
+      { qty: "3 cdas", it: "de mantequilla" },
+      { qty: "1 chorro", it: "de aceite de oliva" },
+      { qty: "Al gusto", it: "sal y pimienta negra" },
+    ],
+    pasos: [
+      "Saca los medallones de la refri 20 minutos antes. Sécalos con papel y sazona con sal y pimienta.",
+      "Mezcla la mostaza con la miel en un bol. Reserva, es tu glaseado.",
+      "En una sartén grande con aceite, sella los medallones 3 minutos por lado. Que dore bonito.",
+      "Agrega la mantequilla, los ajos machacados y el romero. Riega los medallones con la mantequilla aromatizada.",
+      "Unta los medallones con el glaseado de miel y mostaza. Cocina 1 minuto más por lado.",
+      "Reposa 5 minutos antes de servir. Acompaña con puré de papa o ensalada fresca."
+    ],
+    tip: "El cerdo magro se seca rápido. Término apenas rosado por dentro es el punto justo — no temas, está cocido y queda jugoso.",
+    falta: ["Romero fresco", "Miel de abeja", "Mostaza casera"]
+  },
+
+};
+
+/* ---------- PRODUCTOS ---------- */
+const PRODUCTS = [
+  // RES
+  {
+    id: "lomo_fino", nombre: "Lomo fino", cat: "res",
+    img: "assets/prod/lomo-fino.png",
+    desc: "El corte más tierno de la res. Sale del lomo, es magro y suave — perfecto para preparaciones rápidas a fuego fuerte. Si quieres lucirte sin sufrir en la cocina, este es tu corte.",
+    temp: { ideal: "0 a 4 °C", frescoDias: "3 a 5 días", congeladoMeses: "hasta 6 meses",
+      descongelar: "Sácalo de la congeladora a la refrigeradora la noche anterior. Nunca lo descongeles en el microondas — pierde jugos y se vuelve estopa.",
+      malo: ["Color verdoso o grisáceo apagado", "Olor agrio o avinagrado", "Textura pegajosa o babosa", "Líquido oscuro y turbio en la bolsa"] },
+    car: { textura: "Muy tierna", sabor: "Suave, neutro", grasa: "Magro (baja grasa)", terneza: "★★★★★",
+           coccion: ["Sartén (saltado)", "Plancha rápida", "Parrilla a fuego fuerte"] },
+    tips: [
+      "Pídenos que lo cortemos en tiras finas si vas a hacer lomo saltado — corte parejo, salteo parejo.",
+      "Sácalo de la refri 20 minutos antes de cocinar para que la carne pierda el frío del centro.",
+      "Es un corte caro, no lo recocines. Sellado y al plato — adentro debe estar rosado."
+    ],
+    platos: ["lomo_saltado", "bife_chorizo", "tataki_lomo"],
+  },
+  {
+    id: "bife_chorizo", nombre: "Bife de chorizo", cat: "res",
+    img: "assets/prod/bife-chorizo.png",
+    desc: "Corte que enamora a los parrilleros. Tiene un borde de grasa que en la cocción se derrite y le da un sabor profundo. Si dudas qué llevarle al parrillero de la casa, este nunca falla.",
+    temp: { ideal: "0 a 4 °C", frescoDias: "3 a 5 días", congeladoMeses: "hasta 6 meses",
+      descongelar: "Pásalo a refri la noche anterior. Si tienes apuro, ponlo en bolsa hermética bajo agua fría — máximo 1 hora.",
+      malo: ["Borde de grasa amarillento intenso", "Olor avinagrado", "Carne pegajosa al tacto", "Manchas oscuras hundidas"] },
+    car: { textura: "Firme pero tierna", sabor: "Intenso, jugoso", grasa: "Media (con borde graso)", terneza: "★★★★☆",
+           coccion: ["Parrilla", "Sartén pesada", "Plancha"] },
+    tips: [
+      "Pídenos que dejemos el borde de grasa entero — ahí está el sabor. No lo recortes en casa.",
+      "Te lo cortamos al grosor que quieras: 2 cm para sartén, 3 cm para parrilla.",
+      "No lo pinches con tenedor durante la cocción. Solo con pinzas para no perder jugos."
+    ],
+    platos: ["bife_chorizo", "asado_tira_parrilla", "bife_miso"],
+  },
+  {
+    id: "costillas_res", nombre: "Costillas de res", cat: "res",
+    img: "assets/prod/costillas-res.png",
+    desc: "Carne con hueso, llena de sabor y colágeno. Pide cocción larga y paciente — la carne se cae del hueso sola. Plato para domingo en familia.",
+    temp: { ideal: "0 a 4 °C", frescoDias: "2 a 4 días", congeladoMeses: "hasta 6 meses",
+      descongelar: "Solo en refri, 24 horas para 1 kg. Por su grosor, descongelar mal arruina la textura.",
+      malo: ["Olor fuerte agrio", "Hueso despegado y oscuro", "Carne grisácea sin brillo", "Capa de moho en la grasa"] },
+    car: { textura: "Fibrosa, se deshace al cocinar largo", sabor: "Profundo, intenso", grasa: "Media-alta", terneza: "★★★☆☆ (★★★★★ si cocinas largo)",
+           coccion: ["Olla a presión", "Horno bajo y largo", "Estofado"] },
+    tips: [
+      "Marínalas la noche anterior, aunque sea solo con sal, ajo y pimienta. La carne absorbe sabor.",
+      "Si las haces al horno, ponles agua en una bandeja debajo. La humedad las mantiene jugosas."
+    ],
+    platos: ["costillas_bbq", "seco_de_res", "costillas_tamarindo"],
+  },
+  {
+    id: "asado_tira", nombre: "Asado de tira", cat: "res",
+    img: "assets/prod/asado-tira.png",
+    desc: "Tiras de costilla con hueso, finas y largas. Es uno de los favoritos del parrillero peruano y argentino. La grasa entreverada le da sabor y jugo cuando se cocina al fuego.",
+    temp: { ideal: "0 a 4 °C", frescoDias: "3 a 4 días", congeladoMeses: "hasta 6 meses",
+      descongelar: "Refri 12 horas. Al ser delgado, descongela rápido si lo sacas en la mañana para la noche.",
+      malo: ["Olor fuerte", "Grasa amarilla intensa", "Textura blanda y babosa", "Hueso oscuro y suelto"] },
+    car: { textura: "Firme, fibrosa", sabor: "Carnoso, intenso", grasa: "Entreverada", terneza: "★★★☆☆",
+           coccion: ["Parrilla", "Plancha gruesa", "Olla lenta"] },
+    tips: [
+      "Te lo cortamos al grosor que quieras.",
+      "Solo sal gruesa antes de la parrilla. Las hierbas se queman y amargan.",
+      "Si lo haces al horno, primero séllalo en sartén bien caliente. El dorado da sabor."
+    ],
+    platos: ["asado_tira_parrilla", "seco_de_res", "tira_cafe"],
+  },
+  {
+    id: "osobuco", nombre: "Osobuco", cat: "res",
+    img: "assets/prod/osobuco.png",
+    desc: "Corte transversal del jarrete con hueso y tuétano. Es el alma del sancochado y del estofado dominguero — pide cocción larga y la carne queda meloncita.",
+    temp: { ideal: "0 a 4 °C", frescoDias: "3 a 4 días", congeladoMeses: "hasta 6 meses",
+      descongelar: "Refri 18 a 24 horas. Por el grosor, descongelar mal arruina la textura.",
+      malo: ["Olor agrio", "Tuétano oscurecido o seco", "Carne grisácea sin brillo", "Líquido turbio"] },
+    car: { textura: "Fibrosa que se vuelve melosa al fuego lento", sabor: "Profundo, con tuétano", grasa: "Media (con hueso)", terneza: "★★★☆☆ (★★★★★ cocido largo)",
+           coccion: ["Olla a presión", "Sancochado", "Estofado lento"] },
+    tips: [
+      "Te lo cortamos al grosor que quieras.",
+      "El tuétano es la joya — una vez cocido, cómelo sobre pan tostado con sal gruesa.",
+      "Cocción mínima de 2 horas a fuego bajo. Apurarte aquí arruina el plato."
+    ],
+    platos: ["sancochado_limenio", "osobuco_quinua"],
+  },
+  {
+    id: "pescuezo", nombre: "Pescuezo de res", cat: "res",
+    img: "assets/prod/pescuezo.png",
+    desc: "Cuello de res — poca carne, mucho hueso, máximo sabor. Es lo que usaban las abuelas para sacar el caldo perfecto. Si quieres un sancochado o caldo con cuerpo de verdad, este es tu corte.",
+    temp: { ideal: "0 a 4 °C", frescoDias: "3 a 4 días", congeladoMeses: "hasta 6 meses",
+      descongelar: "Refri 12 a 18 horas. Es delgado, descongela más rápido que otros cortes con hueso.",
+      malo: ["Olor a podrido", "Color marrón muy oscuro", "Pegajosidad al tacto", "Grasa amarillenta"] },
+    car: { textura: "Carne fibrosa entre los huesos", sabor: "Intensísimo, da gran caldo", grasa: "Baja", terneza: "★★★☆☆",
+           coccion: ["Caldos largos", "Sancochado", "Olla a presión"] },
+    tips: [
+      "Es corte de cocción, no de asar — saca todo en una olla con tiempo.",
+      "Lava bien con agua fría antes de poner a hervir, y espuma siempre los primeros minutos.",
+      "Te lo cortamos en trozos manejables para que entren bien en tu olla."
+    ],
+    platos: ["caldo_pescuezo", "sancochado_limenio", "pho_criollo"],
+  },
+  {
+    id: "carne_molida", nombre: "Carne molida", cat: "res",
+    img: "assets/prod/carne-molida.png",
+    desc: "La base de los platos caseros de toda la vida: pastel de papa, picadillo, salsa para tallarines, rellenos de ají o pimiento. Molida fresca, no congelada — se nota al cocinar.",
+    temp: { ideal: "0 a 3 °C", frescoDias: "1 a 2 días (consumir pronto)", congeladoMeses: "hasta 4 meses",
+      descongelar: "Refri 4 a 6 horas. Por la superficie expuesta, debe cocinarse el mismo día.",
+      malo: ["Color marrón grisáceo", "Olor agrio", "Textura muy húmeda y pegajosa", "Manchas verdosas"] },
+    car: { textura: "Blanda, fácil de manejar", sabor: "Suave, neutro — absorbe los aderezos", grasa: "Variable según corte", terneza: "★★★★★",
+           coccion: ["Sartén", "Horno (pastel)", "Salsas"] },
+    tips: [
+      "Te la podemos moler fina (para pastel de papa) o gruesa (para hamburguesa) — tú eliges.",
+      "Dora siempre en tandas: si llenas la sartén se hierve en vez de dorarse.",
+      "Una vez descongelada, no vuelvas a congelar. Si te sobra cocida, eso sí se puede."
+    ],
+    platos: ["pastel_papa", "seco_de_res", "croquetas_molida"],
+  },
+
+  // CERDO
+  {
+    id: "pierna_cerdo", nombre: "Pierna de cerdo", cat: "cerdo",
+    img: "assets/prod/pierna-cerdo.png",
+    desc: "Pieza grande, ideal para hornear cuando vienen los suegros, la prima y la ahijada. Bien marinada y al horno es uno de los platos más impresionantes que puedes preparar — y de los más fáciles.",
+    temp: { ideal: "0 a 3 °C", frescoDias: "2 a 3 días", congeladoMeses: "hasta 6 meses",
+      descongelar: "En refri, 24 a 48 horas según tamaño. El cerdo necesita tiempo, no te apures.",
+      malo: ["Olor amoniacal", "Carne grisácea", "Piel pegajosa", "Líquido lechoso en la bolsa"] },
+    car: { textura: "Firme con piel crocante al hornear", sabor: "Dulzón, profundo", grasa: "Media-alta con piel", terneza: "★★★★☆",
+           coccion: ["Horno (clásico)", "Olla a presión luego dorado", "Cocción lenta"] },
+    tips: [
+      "Te la podemos deshuesar para que cocines más fácil, o dejarla con hueso para más sabor — tú dices.",
+      "Para que la piel quede chicharrón, hazle cortes en rombos antes de marinar.",
+      "El cerdo necesita marinado largo. Mínimo 6 horas, ideal toda la noche."
+    ],
+    platos: ["cerdo_horno", "pierna_lacada"],
+  },
+  {
+    id: "chuletas", nombre: "Chuletas de cerdo", cat: "cerdo",
+    img: "assets/prod/chuletas.png",
+    desc: "El corte de cerdo más práctico para el día a día. Con hueso, jugosas y rápidas — listo en 15 minutos. Para esos días en que no hay mucho tiempo pero quieres comer bien.",
+    temp: { ideal: "0 a 3 °C", frescoDias: "2 a 3 días", congeladoMeses: "hasta 4 meses",
+      descongelar: "Refri 8 a 12 horas. Si las dejas afuera, peligroso — el cerdo se daña rápido.",
+      malo: ["Color marrón oscuro apagado", "Olor agrio", "Textura pegajosa", "Hueso amarillento"] },
+    car: { textura: "Firme, jugosa", sabor: "Suave, dulzón", grasa: "Media", terneza: "★★★★☆",
+           coccion: ["Sartén", "Plancha", "Parrilla rápida"] },
+    tips: [
+      "Pídenos el grosor que quieras.",
+      "No las cocines mucho — cerdo bien cocido no significa seco. Adentro debe estar tenue rosado.",
+      "Marínalas mínimo 20 minutos con sal, ajo y mostaza. Sencillo y efectivo."
+    ],
+    platos: ["chuletas_sarten", "chuleta_parrilla", "chuleta_quinua"],
+  },
+  {
+    id: "panceta", nombre: "Panceta de cerdo", cat: "cerdo",
+    img: "assets/prod/panceta.png",
+    desc: "Pecho de cerdo con piel y grasa entreverada — la base de todo chicharrón legítimo. Cuando se cocina bien, la grasa se vuelve crujiente y la carne se deshace en la boca. Sin secretos: paciencia y sal.",
+    temp: { ideal: "0 a 3 °C", frescoDias: "2 a 3 días", congeladoMeses: "hasta 4 meses",
+      descongelar: "Solo en refri, 12 horas. La piel debe estar seca antes de cocinar.",
+      malo: ["Piel pegajosa o babosa", "Olor rancio", "Grasa amarilla intensa", "Manchas oscuras"] },
+    car: { textura: "Grasa que se vuelve crocante", sabor: "Intenso, untuoso", grasa: "Alta (entreverada)", terneza: "★★★★★ al horno",
+           coccion: ["Horno largo", "Frito (chicharrón)", "Estofado en su grasa"] },
+    tips: [
+      "Para chicharrón clásico, pídenosla con la piel completa y déjala secar destapada en refri unas horas antes.",
+      "Cortes en rombos sobre la piel ayudan a que infle y truene.",
+      "Sal solo en la piel, antes de hornear. No le pongas pimienta porque se quema."
+    ],
+    platos: ["panceta_crocante", "panceta_cerveza"],
+  },
+  {
+    id: "bife_lomo_cerdo", nombre: "Bife de lomo de cerdo", cat: "cerdo",
+    img: "assets/prod/bife-lomo-cerdo.png",
+    desc: "El corte más tierno del cerdo — magro, suave y rápido. Su sabor delicado lo hace ideal para preparaciones a la sartén con salsas dulces (miel, manzana, mostaza). Si quieres lucirte sin sufrir, este es tu corte.",
+    temp: { ideal: "0 a 3 °C", frescoDias: "2 a 3 días", congeladoMeses: "hasta 5 meses",
+      descongelar: "Refri 8 a 12 horas. No lo descongeles a temperatura ambiente, el cerdo es sensible.",
+      malo: ["Color muy oscuro o gris apagado", "Olor avinagrado", "Textura pegajosa", "Líquido lechoso en el empaque"] },
+    car: { textura: "Muy tierna, casi como mantequilla", sabor: "Suave, dulzón", grasa: "Muy baja (magro)", terneza: "★★★★★",
+           coccion: ["Sartén con glaseado", "Horno corto", "Plancha"] },
+    tips: [
+      "Te lo cortamos en medallones — el grosor justo para sellar afuera y dejar rosado dentro.",
+      "No lo pases de término. Cerdo magro recocido = seco. Apenas rosado por dentro es lo correcto.",
+      "Combina rico con romero, mostaza, miel y manzana — sabores que abrazan al cerdo."
+    ],
+    platos: ["lomito_romero", "lomo_cerdo_lucuma"],
+  },
+
+  // POLLO
+  {
+    id: "pechuga_pollo", nombre: "Pechuga de pollo", cat: "pollo",
+    img: "assets/prod/pechuga.png",
+    desc: "El comodín de la cocina peruana. Va con todo: sancochada, deshilachada, a la plancha, en milanesa. Magra y saludable, ideal para cuando hay que cocinar para varios sin gastar mucho.",
+    temp: { ideal: "0 a 4 °C", frescoDias: "2 a 3 días", congeladoMeses: "hasta 9 meses",
+      descongelar: "Refri 6-8 horas. El pollo es delicado, nunca lo dejes afuera.",
+      malo: ["Olor fuerte ácido", "Tonalidad grisácea", "Textura pegajosa", "Líquido lechoso o turbio"] },
+    car: { textura: "Magra, firme cuando fresca", sabor: "Suave, neutro", grasa: "Muy baja", terneza: "★★★☆☆ (★★★★★ si no te pasas de cocción)",
+           coccion: ["Sancochado", "Plancha", "Horno", "Apanado"] },
+    tips: [
+      "Pídenos que la fileteamos para milanesa — quedan finas y parejas, perfectas para apanar.",
+      "La pechuga seca es pechuga sobrecocida. Sancochada 12 minutos máximo y al toque.",
+      "Marínala con yogurt natural una hora antes para que quede tiernísima."
+    ],
+    platos: ["aji_gallina", "pollo_al_horno", "pechuga_coco"],
+  },
+  {
+    id: "piernas_muslos", nombre: "Piernas y muslos", cat: "pollo",
+    img: "assets/prod/piernas-muslos.png",
+    desc: "La parte del pollo con más sabor — más jugosa y más sabrosa que la pechuga. Para estofados, guisos, al horno o la sartén. El secreto de las abuelas que sabían que la carne con hueso siempre sabe mejor.",
+    temp: { ideal: "0 a 4 °C", frescoDias: "1 a 2 días", congeladoMeses: "hasta 9 meses",
+      descongelar: "Refri 8 horas. Mejor descongelar despacio para que la carne no suelte tanto líquido.",
+      malo: ["Olor agrio", "Piel amarillenta apagada", "Textura pegajosa", "Carne grisácea cerca al hueso"] },
+    car: { textura: "Jugosa, con piel crocante", sabor: "Intenso, con grasa natural", grasa: "Media (en la piel)", terneza: "★★★★★",
+           coccion: ["Horno", "Estofado", "Sartén", "A la brasa"] },
+    tips: [
+      "No le quites la piel antes de cocinar — protege la carne y queda crocante al final.",
+      "Para guisos, dóralas primero en aceite caliente. El color es sabor.",
+      "Pídenos la cantidad exacta que quieres."
+    ],
+    platos: ["estofado_pollo", "pollo_brasa", "muslos_birria"],
+  },
+  {
+    id: "pollo_entero", nombre: "Pollo entero", cat: "pollo",
+    img: "assets/prod/pollo-entero.png",
+    desc: "Para domingos en familia, no hay nada como un pollo entero al horno. Una pieza, todo el rendimiento — el pecho rinde como fiambre el lunes, los huesos sirven para un caldazo el martes.",
+    temp: { ideal: "0 a 4 °C", frescoDias: "1 a 2 días", congeladoMeses: "hasta 12 meses",
+      descongelar: "Refri 24 horas. Pollo entero descongelado mal cría bacterias por dentro.",
+      malo: ["Olor desagradable", "Piel amarilla apagada", "Cavidad con líquido oscuro", "Pegajosidad al tacto"] },
+    car: { textura: "Variada (pechuga magra + muslo jugoso)", sabor: "Completo, casero", grasa: "Media", terneza: "★★★★☆",
+           coccion: ["Horno entero", "A la brasa", "Sancochado para caldo"] },
+    tips: [
+      "Te lo podemos quitar la piel o trozar como gustes.",
+      "Rellénale el interior con limón y ajo: aromatiza desde adentro mientras se hornea.",
+      "Para que pese y dore parejo, átale las patas con pabilo antes de meterlo al horno."
+    ],
+    platos: ["pollo_al_horno", "pollo_brasa", "pollo_sal_huacatay"],
+  },
+
+  // CORDERO
+  // (Categoría removida)
+
+  // MENUDENCIAS
+  {
+    id: "higado", nombre: "Hígado de pollo", cat: "menud",
+    img: "assets/prod/higado.png",
+    desc: "Subvalorado pero potente — lleno de hierro y sabor. La clave es no recocerlo. Bien hecho, queda suave por dentro, con costra por fuera. Plato de mamá para cuando te ven flaco.",
+    temp: { ideal: "0 a 3 °C", frescoDias: "1 día (consumir lo antes posible)", congeladoMeses: "hasta 3 meses",
+      descongelar: "Solo en refri, 4-6 horas. El hígado se daña rápido, cómelo al toque.",
+      malo: ["Color verdoso o muy oscuro", "Olor muy fuerte", "Textura gomosa al tacto", "Manchas blancas"] },
+    car: { textura: "Suave si no se sobrecocina", sabor: "Intenso, mineral", grasa: "Muy baja", terneza: "★★★★☆",
+           coccion: ["Sartén rápida (encebollado)", "Plancha", "Apanado"] },
+    tips: [
+      "Remójalo 20 minutos en leche antes de cocinar — le baja el sabor fuerte que a algunos no les gusta.",
+      "Cocción máxima 1 minuto por lado. Si lo cocinas más, sale duro y arenoso."
+    ],
+    platos: ["higado_encebollado", "pate_higado"],
+  },
+  {
+    id: "corazon", nombre: "Corazón de pollo", cat: "menud",
+    img: "assets/prod/corazon.png",
+    desc: "El corazón de pollo es la base del anticucho casero — uno de los platos más queridos del Perú. Sabor profundo, textura firme, y cuando lo marinas bien y lo cocinas a la brasa, no hay nada igual. Tradición pura.",
+    temp: { ideal: "0 a 3 °C", frescoDias: "1 día", congeladoMeses: "hasta 4 meses",
+      descongelar: "Refri 6-8 horas. Procura cocinarlo el mismo día que lo descongelas.",
+      malo: ["Olor muy fuerte y rancio", "Color marrón apagado", "Grasa amarilla", "Líquido turbio"] },
+    car: { textura: "Firme, fibrosa", sabor: "Intenso, profundo", grasa: "Baja", terneza: "★★★☆☆ (★★★★★ marinado y a la parrilla)",
+           coccion: ["Anticuchos (parrilla)", "Plancha", "Salteado"] },
+    tips: [
+      "Necesita marinada larga, mínimo 4 horas. Ají panca, ajo y cerveza negra, sin falta.",
+      "Sello fuerte y rápido. Pasado de cocción se vuelve gomoso."
+    ],
+    platos: ["anticuchos", "anticuchos_chocolate"],
+  },
+  {
+    id: "mollejas", nombre: "Mollejas", cat: "menud",
+    img: "assets/prod/mollejas.png",
+    desc: "Pequeñas, sabrosas, sub-apreciadas. Las mollejas de pollo son una joya de la cocina criolla y chifa. Bien cocinadas, son una de las cosas más ricas que puedes comer con arroz blanco.",
+    temp: { ideal: "0 a 3 °C", frescoDias: "1 a 2 días", congeladoMeses: "hasta 3 meses",
+      descongelar: "Refri 4-6 horas. Cómelas al toque después de descongelar.",
+      malo: ["Olor agrio fuerte", "Color verdoso", "Textura muy babosa", "Manchas negras"] },
+    car: { textura: "Firme, chiclosa si está bien cocida", sabor: "Profundo, ligeramente metálico", grasa: "Baja", terneza: "★★★★☆ (con sancochado previo)",
+           coccion: ["Salteado al sillao", "Anticuchos", "Estofado"] },
+    tips: [
+      "Las dejamos limpias, sin la membrana amarilla — solo cocinas.",
+      "Sancóchalas antes 12-15 minutos con kion — quedan tiernas.",
+      "Saltéalas a fuego ALTO. Si bajas el fuego, sueltan agua y se hierven."
+    ],
+    platos: ["mollejitas_al_sillao", "mollejas_crocantes"],
+  },
+
+  // EMBUTIDOS
+  // (Categoría removida)
+];
+
+/* ---------- helpers ---------- */
+const $  = (s, c=document) => c.querySelector(s);
+const $$ = (s, c=document) => [...c.querySelectorAll(s)];
+
+function catName(id) { return (CATS.find(c=>c.id===id) || {}).label || id; }
+
+/* ---------- CATEGORY BAR ---------- */
+let activeCat = "todos";
+let searchTerm = "";
+
+function renderCats() {
+  const wrap = $("#cats");
+  wrap.innerHTML = CATS.map(c => `
+    <button class="cat" role="tab" aria-pressed="${c.id===activeCat}" data-cat="${c.id}">
+      ${c.label}
+    </button>
+  `).join("");
+  $$(".cat", wrap).forEach(btn => {
+    btn.addEventListener("click", () => {
+      activeCat = btn.dataset.cat;
+      renderCats();
+      renderGrid();
+    });
+  });
+}
+
+/* ---------- PRODUCT GRID ---------- */
+function renderGrid() {
+  const grid = $("#product-grid");
+  const filtered = PRODUCTS.filter(p => {
+    const catOk = activeCat === "todos" || p.cat === activeCat;
+    const searchOk = !searchTerm || p.nombre.toLowerCase().includes(searchTerm.toLowerCase());
+    return catOk && searchOk;
+  });
+
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="empty">No encontramos ese corte. Prueba con otro nombre o pregunta al carnicero en mostrador.</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(p => `
+    <button class="card reveal" data-id="${p.id}" aria-label="Ver detalle de ${p.nombre}">
+      <div class="card-recipes-cta">Ver consejos y recetas con ${p.nombre.toLowerCase()} <span class="arrow">→</span></div>
+      <div class="card-img ${p.cat} ${p.img ? 'has-photo' : ''}">
+        ${p.img
+          ? `<img src="${p.img}" alt="${p.nombre}" loading="lazy" />`
+          : `<span class="ph-label">${p.nombre}</span>`}
+      </div>
+      <div class="card-body">
+        <div class="card-tag">${catName(p.cat)}</div>
+      </div>
+    </button>
+  `).join("");
+
+  $$(".card", grid).forEach(card => {
+    card.addEventListener("click", () => openProduct(card.dataset.id));
+  });
+
+  observeReveals();
+}
+
+/* ---------- RECIPES GRID ---------- */
+function renderRecipes() {
+  const grid = $("#recipes-grid");
+  // Display order — manually tuned so visually-similar dishes are not adjacent
+  const ORDER = [
+    "tataki_lomo", "lomo_saltado", "seco_de_res",
+    "bife_miso", "sancochado_limenio", "caldo_pescuezo",
+    "costillas_tamarindo", "costillas_bbq", "asado_tira_parrilla",
+    "tira_cafe", "osobuco_quinua", "pho_criollo",
+    "croquetas_molida", "pastel_papa",
+    "pierna_lacada", "cerdo_horno",
+    "chuleta_quinua", "lomito_romero",
+    "chuletas_sarten", "chuleta_parrilla",
+    "panceta_cerveza", "panceta_crocante",
+    "lomo_cerdo_lucuma",
+    "pechuga_coco", "aji_gallina", "pollo_al_horno",
+    "muslos_birria", "pollo_sal_huacatay",
+    "bife_chorizo",
+    "pollo_brasa", "estofado_pollo",
+    "pate_higado", "higado_encebollado",
+    "anticuchos_chocolate", "mollejas_crocantes", "mollejitas_al_sillao",
+    "anticuchos",
+  ];
+  const allRecipes = ORDER.map(id => RECIPES[id]).filter(Boolean);
+  grid.innerHTML = allRecipes.map(r => `
+    <button class="card reveal" data-rid="${r.id}" aria-label="Ver receta ${r.nombre}">
+      <div class="card-img ${r.img ? 'has-photo' : ''}">
+        ${r.img
+          ? `<img src="${r.img}" alt="${r.nombre}" loading="lazy" />`
+          : `<span class="ph-label">${r.nombre}</span>`}
+      </div>
+      <div class="card-body">
+        ${r.innovacion ? `<span class="badge-innov">Receta Innovación</span>` : `<div class="card-tag">Inspirado en ${r.chef.nombre}</div>`}
+        <div class="card-title">${r.nombre}</div>
+        <div class="card-cta">Ver receta <span class="arrow">→</span></div>
+      </div>
+    </button>
+  `).join("");
+  $$(".card", grid).forEach(c => {
+    c.addEventListener("click", () => openRecipe(c.dataset.rid));
+  });
+  observeReveals();
+}
+
+/* ---------- MODAL: PRODUCT DETAIL ---------- */
+function openProduct(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  const recipeList = p.platos.map(rid => {
+    const r = RECIPES[rid];
+    return r ? `
+      <button class="dish-pill" data-rid="${rid}">
+        <div style="display:flex; align-items:center; gap:10px; min-width:0">
+          <span class="chef-avatar mini" style="flex:none"><span class="seal">${r.chef.iniciales}</span></span>
+          <div style="min-width:0">
+            <div class="name">${r.nombre}</div>
+            <div class="chef">${r.innovacion ? '<span class="badge-innov">Receta Innovación</span>' : r.chef.linea}</div>
+          </div>
+        </div>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    ` : "";
+  }).join("");
+
+  const otherDishes = otherDishesFor(p);
+
+  $("#modal-card").innerHTML = `
+    <div class="modal-head">
+      <div class="crumb">${catName(p.cat)} · Detalle del corte</div>
+      <button class="close-btn" aria-label="Cerrar" onclick="closeModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="modal-hero card-img ${p.cat} ${p.img ? 'has-photo' : ''}">
+      ${p.img ? `<img src="${p.img}" alt="${p.nombre}" loading="lazy" />` : ''}
+      <div>
+        <span class="cat-pill">${catName(p.cat)}</span>
+        <h2 id="modal-title">${p.nombre}</h2>
+      </div>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="block">
+        <div class="block-head">
+          <div class="glyph">${ICONS.pin}</div>
+          <h3>¿Qué es este corte?</h3>
+        </div>
+        <p>${p.desc}</p>
+      </div>
+
+      <div class="block">
+        <div class="block-head">
+          <div class="glyph">${ICONS.thermo}</div>
+          <h3>Temperatura y conservación</h3>
+        </div>
+        <div class="keyvals">
+          <div class="kv"><div class="k">Refrigeradora</div><div class="v">${p.temp.ideal}</div></div>
+          <div class="kv"><div class="k">Fresco dura</div><div class="v">${p.temp.frescoDias}</div></div>
+          <div class="kv"><div class="k">Congelado</div><div class="v">${p.temp.congeladoMeses}</div></div>
+          <div class="kv"><div class="k">Descongelar</div><div class="v" style="font-size:13px; font-family:Karla; color:var(--ink-soft); line-height:1.35">${p.temp.descongelar}</div></div>
+        </div>
+        <p style="margin-top:14px"><b style="color:var(--ink)">¿Cómo saber si ya no está bueno?</b></p>
+        <ul class="signals">
+          ${p.temp.malo.map(s => `<li>${s}</li>`).join("")}
+        </ul>
+      </div>
+
+      <div class="block">
+        <div class="block-head">
+          <div class="glyph">${ICONS.star}</div>
+          <h3>Características del corte</h3>
+        </div>
+        <div class="traits">
+          <div class="trait"><b>Textura:</b> ${p.car.textura}</div>
+          <div class="trait"><b>Sabor:</b> ${p.car.sabor}</div>
+          <div class="trait"><b>Grasa:</b> ${p.car.grasa}</div>
+          <div class="trait"><b>Terneza:</b> ${p.car.terneza}</div>
+        </div>
+        <p style="margin-top:14px"><b style="color:var(--ink)">Cocción ideal:</b></p>
+        <div class="traits">
+          ${p.car.coccion.map(c => `<div class="trait">${c}</div>`).join("")}
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-head">
+          <div class="glyph">${ICONS.bulb}</div>
+          <h3>Tips del carnicero</h3>
+        </div>
+        <div class="tips">
+          ${p.tips.map(t => `
+            <div class="tip">
+              <div class="who">Consejo de la casa</div>
+              <p>${t}</p>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-head">
+          <div class="glyph">${ICONS.plate}</div>
+          <h3>Recetas para preparar con ${p.nombre.toLowerCase()}</h3>
+        </div>
+        <div class="dishes">
+          ${recipeList}
+        </div>
+        ${otherDishes.length ? `
+          <p style="margin-top:18px"><b style="color:var(--ink)">También va bien en:</b></p>
+          <p style="color:var(--ink-soft); font-size:14.5px">${otherDishes.join(" · ")}</p>
+        ` : ""}
+      </div>
+    </div>
+  `;
+
+  $$(".dish-pill", $("#modal-card")).forEach(b => {
+    b.addEventListener("click", () => openRecipe(b.dataset.rid));
+  });
+
+  showModal();
+}
+
+function otherDishesFor(p) {
+  // Suggest some plato names beyond the explicit ones
+  const map = {
+    res:     ["estofado de res", "carapulcra con res", "tallarines verdes con bistec", "saltado de carne"],
+    cerdo:   ["arroz con chancho", "cau cau de chancho", "tacu tacu con chicharrón", "carapulcra"],
+    pollo:   ["arroz con pollo", "tallarines verdes con pollo", "milanesa de pollo", "caldo de pollo"],
+    menud:   ["caldo de mondongo", "cau cau", "saltado de menudencia"],
+  };
+  return map[p.cat] || [];
+}
+
+/* ---------- MODAL: RECIPE ---------- */
+function openRecipe(rid) {
+  const r = RECIPES[rid];
+  if (!r) return;
+  $("#modal-card").innerHTML = `
+    <div class="modal-head">
+      <div class="crumb">Receta · ${r.porciones} porciones</div>
+      <button class="close-btn" aria-label="Cerrar" onclick="closeModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="recipe-hero ${r.img ? 'has-photo' : ''}" ${r.img ? `style="--recipe-img:url('${r.img}'); --recipe-pos:${r.imgPos || 'center'}"` : ''}>
+      <div>
+        ${r.innovacion ? `<span class="badge-innov" style="margin-bottom:10px; display:inline-flex">Receta Innovación</span>` : ''}
+        <div class="chef-credit">
+          <span class="chef-avatar"><span class="seal">${r.chef.iniciales}</span></span>
+          <span class="chef-stack">
+            <span class="k">${r.chef.linea.split(' ').slice(0,1).join(' ').replace(',', '') === 'Receta' ? 'Receta basada en' : 'Inspirado en'}</span>
+            <span class="name">${r.chef.nombre}</span>
+          </span>
+        </div>
+        <h2 id="modal-title" style="color:#FBF6EB">${r.nombre}</h2>
+      </div>
+    </div>
+
+    <div class="meta-strip">
+      <div class="mi"><div class="lbl">Preparación</div><div class="val">${r.prep} min</div></div>
+      <div class="mi"><div class="lbl">Cocción</div><div class="val">${r.coccion} min</div></div>
+      <div class="mi"><div class="lbl">Porciones</div><div class="val">${r.porciones} pers.</div></div>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="block">
+        <div class="block-head">
+          <div class="glyph">${ICONS.cart}</div>
+          <h3>Ingredientes</h3>
+        </div>
+        <ul class="ing-list">
+          ${r.ingredientes.map(i => `
+            <li>
+              <span class="qty">${i.qty}</span>
+              <span class="it">${i.it}${i.clave ? '<span class="star" title="Disponible en la tienda">●</span>' : ''}</span>
+            </li>
+          `).join("")}
+        </ul>
+        <p style="font-size:12px; color:var(--ink-mute); margin-top:10px">
+          <span style="color:var(--carne)">●</span> Lo conseguimos en la carnicería.
+        </p>
+      </div>
+
+      <div class="block">
+        <div class="block-head">
+          <div class="glyph">${ICONS.list}</div>
+          <h3>Preparación paso a paso</h3>
+        </div>
+        <ol class="steps">
+          ${r.pasos.map(s => `<li>${s}</li>`).join("")}
+        </ol>
+      </div>
+
+      <div class="block" style="border-bottom:0">
+        <div class="block-head">
+          <div class="glyph">${ICONS.quote}</div>
+          <h3>Tip de la receta</h3>
+        </div>
+        <div class="recipe-tip">
+          <div class="who">${r.chef.nombre}</div>
+          <p>${r.tip}</p>
+        </div>
+      </div>
+
+      <div class="combo">
+        <div class="eyebrow">Lleva el combo completo</div>
+        <h4>Para preparar este plato, además solo te falta:</h4>
+        <p class="sub">Pregúntanos en mostrador, te armamos el paquete para que vayas con todo a casa.</p>
+        <div class="combo-items">
+          ${r.falta.map(f => `
+            <div class="combo-item">
+              <div class="combo-ico">${ICONS.herb}</div>
+              <div>
+                <div class="name">${f}</div>
+                <div class="qty">Disponible hoy</div>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+        <button class="combo-cta" onclick="closeModal()">
+          Pídelo en mostrador
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+
+    </div>
+  `;
+  // scroll modal to top
+  $("#modal-card").scrollIntoView ? null : null;
+  $("#modal-card").parentElement.scrollTop = 0;
+  showModal();
+}
+
+/* ---------- MODAL CONTROL ---------- */
+function showModal() {
+  $("#modal").setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  // scroll modal to top
+  const m = $("#modal");
+  m.scrollTop = 0;
+}
+function closeModal() {
+  $("#modal").setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+$("#modal").addEventListener("click", (e) => { if (e.target.id === "modal") closeModal(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+/* ---------- SEARCH ---------- */
+$("#search").addEventListener("input", (e) => {
+  searchTerm = e.target.value;
+  renderGrid();
+});
+
+/* ---------- REVEAL ON SCROLL ---------- */
+let io;
+function observeReveals() {
+  if (!io) {
+    io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add("in");
+          io.unobserve(en.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -40px 0px" });
+  }
+  $$(".reveal").forEach(el => {
+    if (!el.classList.contains("in")) io.observe(el);
+  });
+}
+
+/* ---------- FLOATING JUMP-TO-RECIPES FAB ---------- */
+(function setupJumpFab() {
+  const fab = document.getElementById('jump-fab');
+  const target = document.getElementById('recetas');
+  if (!fab || !target) return;
+  fab.addEventListener('click', () => {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  // show after scrolling past the cover, hide when reaching the recipes section
+  const onScroll = () => {
+    const y = window.scrollY;
+    const recTop = target.getBoundingClientRect().top + window.scrollY;
+    if (y > 380 && y + window.innerHeight * 0.85 < recTop) {
+      fab.classList.add('visible');
+      fab.classList.remove('past');
+    } else if (y + window.innerHeight * 0.85 >= recTop) {
+      fab.classList.remove('visible');
+      fab.classList.add('past');
+    } else {
+      fab.classList.remove('visible');
+      fab.classList.remove('past');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* ---------- INIT ---------- */
+renderCats();
+renderGrid();
+renderRecipes();
+observeReveals();
+
+/* ---------- ANALYTICS ---------- */
+(function () {
+  const SID = sessionStorage.getItem("sid") || Math.random().toString(36).slice(2, 10);
+  sessionStorage.setItem("sid", SID);
+
+  function track(evento, detalle) {
+    fetch("/track", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ session: SID, evento, detalle })
+    }).catch(() => {});
+  }
+
+  // Visita
+  track("visita", document.title);
+
+  // Tabs de categoría
+  document.addEventListener("click", e => {
+    const cat = e.target.closest(".cat");
+    if (cat) track("categoria", cat.dataset.cat);
+  });
+
+  // Búsqueda (debounce 600 ms)
+  let searchTimer;
+  const searchEl = $("#search");
+  if (searchEl) searchEl.addEventListener("input", e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
+      if (e.target.value.trim()) track("busqueda", e.target.value.trim());
+    }, 600);
+  });
+
+  // WhatsApp CTA
+  document.addEventListener("click", e => {
+    if (e.target.closest('a[href*="wa.me"]')) track("whatsapp_cta", "click");
+  });
+
+  // Links de tiendas (Google Maps)
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href*="maps"]');
+    if (a) track("tienda_maps", a.textContent.trim().slice(0, 40));
+  });
+
+  // Abrir producto — hook sobre openProduct
+  const _openProduct = window.openProduct;
+  window.openProduct = function(id) {
+    const p = PRODUCTS.find(x => x.id === id);
+    if (p) track("producto_abierto", p.nombre);
+    return _openProduct.apply(this, arguments);
+  };
+
+  // Abrir receta — hook sobre openRecipe
+  const _openRecipe = window.openRecipe;
+  window.openRecipe = function(rid) {
+    const r = RECIPES[rid];
+    if (r) track("receta_abierta", r.nombre);
+    return _openRecipe.apply(this, arguments);
+  };
+})();
+
+</script>
+</body>
+</html>
